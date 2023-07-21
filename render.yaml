@@ -1,0 +1,27 @@
+databases:
+  - name: you_know_db
+    region: singapore
+    plan: free
+    databaseName: you_know_db
+    user: you_know_user
+
+services:
+  - type: web
+    name: you_know
+    env: python
+    region: singapore
+    buildCommand: './build.sh'
+    startCommand: 'gunicorn youKnow.wsgi:application'
+    plan: free
+    branch: you_know_1
+    healthCheckPath: /
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: you_know_db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+    autoDeploy: true
