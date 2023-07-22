@@ -10,7 +10,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<h2 class="center">Hello, {{ user.first_name }} {{ user.last_name }}</h2>
+<h2 class="center">Hello, {{ user.username }}</h2>
 {% else %}
 <h2 class="center">
   <a href="{% url 'you_know:signup' %}" class="btn btn-primary">Signup</a>

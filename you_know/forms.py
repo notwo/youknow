@@ -10,4 +10,4 @@ class YouKnowUserChangeForm(UserChangeForm):
 class YouKnowUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('email',)
+        fields = ('username', 'email',)
