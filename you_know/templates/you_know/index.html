@@ -1,15 +1,19 @@
-{% load static %}
+{% extends 'you_know/base.html' %}
 
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!--    <link rel="stylesheet" href="{% static 'css/style.css' %}" /> -->
-    <title>Django Render</title>
-  </head>
-  <body>
-    <h1 class="center">How to deploy Django to Render</h1>
-  </body>
-</html>
+{% block header %}
+<nav class="menu-wrap">
+  <ul class="menu">
+    <li></li>
+  </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h2 class="center">Hello, {{ user.first_name }} {{ user.last_name }}</h2>
+{% else %}
+<h2 class="center">
+  <a href="{% url 'you_know:signup' %}" class="btn btn-primary">Signup</a>
+</h2>
+{% endif %}
+{% endblock %}
