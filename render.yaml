@@ -13,7 +13,7 @@ services:
     buildCommand: './build.sh'
     startCommand: 'gunicorn youKnow.wsgi:application'
     plan: free
-    branch: main
+    branch: you_know_6
     healthCheckPath: /
     envVars:
       - key: DATABASE_URL
