@@ -2,7 +2,7 @@ from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as BaseLogoutView
-from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import YouKnowUserCreationForm, LoginForm
 
@@ -33,6 +33,7 @@ class LoginView(BaseLoginView):
 class LogoutView(BaseLogoutView):
     success_url = reverse_lazy("you_know:index")
 
+
 class YouKnowPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     success_url = reverse_lazy('you_know:password_change_done')
     template_name = 'you_know/password_change.html'
@@ -42,5 +43,26 @@ class YouKnowPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
         context["form_name"] = "password_change"
         return context
 
+
 class YouKnowPasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'you_know/password_change_done.html'
+
+
+class YouKnowPasswordResetView(PasswordResetView):
+    subject_template_name = 'you_know/mail_template/reset/subject.txt'
+    email_template_name = 'you_know/mail_template/reset/message.txt'
+    template_name = 'you_know/password_reset_form.html'
+    success_url = reverse_lazy('you_know:password_reset_done')
+
+
+class YouKnowPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'you_know/password_reset_done.html'
+
+
+class YouKnowPasswordResetConfirmView(PasswordResetConfirmView):
+    success_url = reverse_lazy('you_know:password_reset_complete')
+    template_name = 'you_know/password_reset_confirm.html'
+
+
+class YouKnowPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'you_know/password_reset_complete.html'

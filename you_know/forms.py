@@ -7,10 +7,12 @@ class YouKnowUserChangeForm(UserChangeForm):
         model = CustomUser
         fields = '__all__'
 
+
 class YouKnowUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'email',)
+
 
 class LoginForm(AuthenticationForm):
     class Meta:
