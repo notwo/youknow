@@ -1,0 +1,25 @@
+{% extends 'you_know/base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<article>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+    {{ field.label }}
+    {{ field }}
+    {{ field.errors }}
+    {% endfor %}
+    <section>
+      <button type="submit" class="btn btn-primary">Create</button>
+      <a href="{% url 'you_know:index' %}" class="btn btn-secondary">Back</a>
+    </section>
+  </form>
+</article>
+{% endblock %}
