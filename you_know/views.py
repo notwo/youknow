@@ -1,18 +1,13 @@
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView
-from .forms import YouKnowUserCreationForm
-import logging
+from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as BaseLogoutView
+from .forms import YouKnowUserCreationForm, LoginForm
 
 
 class IndexView(TemplateView):
-    email = "77gecco@gmail.com"
-    password = "notwo1006"
-    user = authenticate(email=email, password=password)
-    logger = logging.getLogger('development')
-    logger.info('Hello World!')
-    logger.info(user)
     template_name = "you_know/index.html"
+
 
 class SignupView(CreateView):
     form_class = YouKnowUserCreationForm
@@ -26,3 +21,12 @@ class SignupView(CreateView):
         user = authenticate(email=email, password=password)
         login(self.request, user)
         return response
+
+
+class LoginView(BaseLoginView):
+    form_class = LoginForm
+    template_name = "you_know/login.html"
+
+
+class LogoutView(BaseLogoutView):
+    success_url = reverse_lazy("you_know:index")

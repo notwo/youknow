@@ -1,5 +1,8 @@
 {% extends 'you_know/base.html' %}
 
+{% block title %}
+{% endblock %}
+
 {% block header %}
 <nav class="menu-wrap">
   <ul class="menu">
@@ -11,9 +14,11 @@
 {% block content %}
 {% if user.is_authenticated %}
 <h2 class="center">Hello, {{ user.username }}</h2>
+<a href="{% url 'you_know:logout' %}" class="btn btn-primary">Logout</a>
 {% else %}
 <h2 class="center">
   <a href="{% url 'you_know:signup' %}" class="btn btn-primary">Signup</a>
+  <a href="{% url 'you_know:login' %}" class="btn btn-primary">Login</a>
 </h2>
 {% endif %}
 {% endblock %}

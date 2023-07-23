@@ -110,6 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = "you_know:index"
+LOGOUT_REDIRECT_URL = "you_know:login"
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
