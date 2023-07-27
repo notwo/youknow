@@ -1,14 +1,10 @@
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as BaseLogoutView
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from ..forms import YouKnowUserCreationForm, LoginForm
-
-
-class IndexView(TemplateView):
-    template_name = "you_know/index.html"
 
 
 class SignupView(CreateView):
