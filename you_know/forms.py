@@ -21,9 +21,6 @@ class LoginForm(AuthenticationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    username = forms.CharField()
-    email = forms.EmailField()
-
     class Meta:
         model = CustomUser
-        fields = ('username', 'email',)
+        fields = ('username', 'email')
