@@ -41,7 +41,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     username_validator = UnicodeUsernameValidator()
     username = models.CharField(
-        "ユーザー名",
+        verbose_name=_("username"),
         max_length=150,
         unique=True,
         help_text="150文字以内で文字や数字を使うことができます（記号は「@/./+/-/_」のみ使用可能）。",

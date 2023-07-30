@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import top, user_auth
+from .views import top, user_auth, user_setting
 
 app_name = 'you_know'
 urlpatterns = [
@@ -13,4 +13,7 @@ urlpatterns = [
   path('password_reset/done/', user_auth.YouKnowPasswordResetDoneView.as_view(), name='password_reset_done'),
   path('reset/<uidb64>/<token>/', user_auth.YouKnowPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
   path('reset/done/', user_auth.YouKnowPasswordResetCompleteView.as_view(), name='password_reset_complete'),
+  path('user_setting/<slug:pk>/', user_setting.UserUpdateView.as_view(), name='user_setting'),
+  path('user_setting/<slug:pk>/delete/', user_setting.UserDeleteView.as_view(), name='delete'),
+  path('user_setting/user/delete_done/', user_setting.UserDeleteDoneView.as_view(), name='delete_done'),
 ]
