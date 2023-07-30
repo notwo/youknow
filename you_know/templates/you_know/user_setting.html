@@ -23,5 +23,6 @@
       <button type="submit" class="btn btn-primary btn-block" onClick="javascript:history.go(-1);">戻る</button>
     </section>
   </form>
+  <a href="{% url 'you_know:delete' user.uuid %}">アカウント削除する</a>
 </article>
 {% endblock %}
