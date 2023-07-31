@@ -9,7 +9,7 @@ from django.http import Http404
 
 
 class UserUpdateView(UpdateView):
-    template_name = "you_know/user_setting.html"
+    template_name = "you_know/user_setting/profile.html"
     form_class = UserUpdateForm
     model = CustomUser
 
@@ -18,11 +18,11 @@ class UserUpdateView(UpdateView):
         return queryset
 
     def get_success_url(self, **kwargs):
-        return reverse("you_know:user_setting", kwargs={'pk': self.kwargs.get('pk')})
+        return reverse("you_know:profile", kwargs={'pk': self.kwargs.get('pk')})
 
 
 class UserDeleteView(DeleteView):
-    template_name = "you_know/delete.html"
+    template_name = "you_know/user_setting/delete_account.html"
     model = CustomUser
 
     def get_success_url(self, **kwargs):
@@ -34,17 +34,17 @@ class UserDeleteView(DeleteView):
         }
         subject = 'アカウント削除のお知らせ'
         send_mail(subject, render_to_string(email_template_name, context), 'info@example.com', [self.request.user.email])
-        return reverse('you_know:delete_done')
+        return reverse('you_know:delete_account_done')
 
 
 class UserDeleteDoneView(TemplateView):
-    template_name = "you_know/delete_done.html"
+    template_name = "you_know/user_setting/delete_account_done.html"
 
 
 class UserDeleteAccountReasonView(TemplateView, ModelFormMixin):
     form_class = UserDeleteAccountReasonForm
     model = DeleteAccountReason
-    template_name = "you_know/delete_account_reason.html"
+    template_name = "you_know/user_setting/delete_account_reason.html"
     success_url = reverse_lazy("you_know:delete_account_reason_done")
 
     def __init__(self):
@@ -73,4 +73,4 @@ class UserDeleteAccountReasonView(TemplateView, ModelFormMixin):
 
 
 class UserDeleteAccountReasonDoneView(TemplateView):
-    template_name = "you_know/delete_account_reason_done.html"
+    template_name = "you_know/user_setting/delete_account_reason_done.html"

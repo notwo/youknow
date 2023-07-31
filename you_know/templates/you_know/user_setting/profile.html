@@ -20,9 +20,9 @@
     {% csrf_token %}
     <section class="form-group">
       <button type="submit" class="btn btn-primary btn-block">送信</button>
-      <button type="submit" class="btn btn-primary btn-block" onClick="javascript:history.go(-1);">戻る</button>
+      <a href="{% url 'you_know:index' %}">戻る</a>
     </section>
   </form>
-  <a href="{% url 'you_know:delete' user.uuid %}">アカウント削除する</a>
+  <a href="{% url 'you_know:delete_account' user.uuid %}">アカウント削除する</a>
 </article>
 {% endblock %}
