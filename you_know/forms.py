@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django import forms
-from .models import CustomUser
+from .models import CustomUser, DeleteAccountReason
 
 
 class YouKnowUserChangeForm(UserChangeForm):
@@ -24,3 +24,13 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'email')
+
+
+class UserDeleteAccountReasonForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = " "
+
+    class Meta:
+        model = DeleteAccountReason
+        fields = ('question1', 'question2', 'question3', 'message')

@@ -1,0 +1,30 @@
+{% extends 'you_know/base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<p>この度はYouKnowのご利用ありがとうごさいました。アカウント削除理由について入力してください</p>
+<article>
+  <form action="" method="POST">
+    {% for field in form %}
+    <section class="form-group">
+      {% if field.field.widget.input_type == 'checkbox' %}
+      {{ field }}
+      <label class="" for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+      {% else %}
+      <p>その他お伝えしたいことがあればご入力ください</p>
+      {{ field }}
+      {% endif %}
+    </section>
+    {% endfor %}
+    {% csrf_token %}
+    <section class="form-group">
+      <button type="submit" class="btn btn-primary btn-block">送信する</button>
+    </section>
+  </form>
+</article>
+{% endblock %}

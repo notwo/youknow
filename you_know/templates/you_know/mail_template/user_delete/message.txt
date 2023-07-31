@@ -1,0 +1,6 @@
+アカウント削除完了しました。
+
+宜しければ、本サービスの品質向上のため以下URLからアカウント削除理由をご入力お願い致します。
+{{current_host}}{% url 'you_know:delete_account_reason' token %}
+
+※入力期限は1週間です。

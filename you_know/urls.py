@@ -16,4 +16,6 @@ urlpatterns = [
   path('user_setting/<slug:pk>/', user_setting.UserUpdateView.as_view(), name='user_setting'),
   path('user_setting/<slug:pk>/delete/', user_setting.UserDeleteView.as_view(), name='delete'),
   path('user_setting/user/delete_done/', user_setting.UserDeleteDoneView.as_view(), name='delete_done'),
+  path('user_setting/user/delete_account_reason/<token>', user_setting.UserDeleteAccountReasonView.as_view(), name='delete_account_reason'),
+  path('user_setting/user/delete_account_reason_done/', user_setting.UserDeleteAccountReasonDoneView.as_view(), name='delete_account_reason_done'),
 ]
