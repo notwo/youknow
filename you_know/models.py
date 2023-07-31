@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.core.mail import send_mail
 
 import uuid
+import hashlib
 
 
 class UserManager(BaseUserManager):
@@ -36,6 +37,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         primary_key=True,
+        db_index=True,
         editable=False
     )
 
@@ -44,6 +46,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("username"),
         max_length=150,
         unique=True,
+        db_index=True,
         help_text="150文字以内で文字や数字を使うことができます（記号は「@/./+/-/_」のみ使用可能）。",
         validators=[username_validator],
         error_messages={
@@ -92,3 +95,30 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+class DeleteMailToken(models.Model):
+    token = models.CharField(max_length=150, unique=True, db_index=True, blank=False)
+    created_at = models.DateTimeField("created_at", default=timezone.now)
+
+    @staticmethod
+    def create(_, email: str):
+        dt = timezone.now()
+        sentence = email + dt.strftime('%Y%m%d%H%M%S')
+        rand = hashlib.sha1(sentence.encode('utf-8')).hexdigest()
+        DeleteMailToken.objects.create(token=rand)
+        return rand
+
+    class Meta:
+        db_table = 'delete_mail_token'
+
+
+class DeleteAccountReason(models.Model):
+    question1 = models.BooleanField(verbose_name='使い方がわからない', default=False)
+    question2 = models.BooleanField(verbose_name='同様のサービスを他で利用している', default=False, blank=True,)
+    question3 = models.BooleanField(verbose_name='データ登録等操作がし辛い', default=False, blank=True,)
+    message = models.TextField(verbose_name=_("message"), blank=True, null=True,)
+    created_at = models.DateTimeField("created_at", default=timezone.now, db_index=True)
+
+    class Meta:
+        db_table = 'delete_account_reason'

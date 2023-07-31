@@ -2,4 +2,4 @@
 
 以下URLよりパスワード再設定を行ってください。
 
-{{ protocol}}://{{ domain }}{% url 'you_know:password_reset_confirm' uid token %}
+{{ protocol }}://{{ domain }}{% url 'you_know:password_reset_confirm' uid token %}
