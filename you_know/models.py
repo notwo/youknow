@@ -122,3 +122,14 @@ class DeleteAccountReason(models.Model):
 
     class Meta:
         db_table = 'delete_account_reason'
+
+
+class Library(models.Model):
+    title = models.CharField(verbose_name=_('library'), max_length=50, blank=False)
+    content = models.TextField(verbose_name=_('content'), max_length=50, blank=True, null=True,)
+    custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'library'
