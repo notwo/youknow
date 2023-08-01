@@ -9,7 +9,7 @@ from ..forms import YouKnowUserCreationForm, LoginForm
 
 class SignupView(CreateView):
     form_class = YouKnowUserCreationForm
-    template_name = "you_know/signup.html"
+    template_name = "you_know/user_auth/signup.html"
     success_url = reverse_lazy("you_know:index")
 
     def form_valid(self, form):
@@ -23,7 +23,7 @@ class SignupView(CreateView):
 
 class LoginView(BaseLoginView):
     form_class = LoginForm
-    template_name = "you_know/login.html"
+    template_name = "you_know/user_auth/login.html"
 
 
 class LogoutView(BaseLogoutView):
@@ -32,7 +32,7 @@ class LogoutView(BaseLogoutView):
 
 class YouKnowPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     success_url = reverse_lazy('you_know:password_change_done')
-    template_name = 'you_know/password_change.html'
+    template_name = 'you_know/user_auth/password_change.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -41,24 +41,24 @@ class YouKnowPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 
 
 class YouKnowPasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
-    template_name = 'you_know/password_change_done.html'
+    template_name = 'you_know/user_auth/password_change_done.html'
 
 
 class YouKnowPasswordResetView(PasswordResetView):
     subject_template_name = 'you_know/mail_template/reset/subject.txt'
     email_template_name = 'you_know/mail_template/reset/message.txt'
-    template_name = 'you_know/password_reset_form.html'
+    template_name = 'you_know/user_auth/password_reset.html'
     success_url = reverse_lazy('you_know:password_reset_done')
 
 
 class YouKnowPasswordResetDoneView(PasswordResetDoneView):
-    template_name = 'you_know/password_reset_done.html'
+    template_name = 'you_know/user_auth/password_reset_done.html'
 
 
 class YouKnowPasswordResetConfirmView(PasswordResetConfirmView):
     success_url = reverse_lazy('you_know:password_reset_complete')
-    template_name = 'you_know/password_reset_confirm.html'
+    template_name = 'you_know/user_auth/password_reset_confirm.html'
 
 
 class YouKnowPasswordResetCompleteView(PasswordResetCompleteView):
-    template_name = 'you_know/password_reset_complete.html'
+    template_name = 'you_know/user_auth/password_reset_complete.html'
