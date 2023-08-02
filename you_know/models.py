@@ -126,10 +126,34 @@ class DeleteAccountReason(models.Model):
 
 class Library(models.Model):
     title = models.CharField(verbose_name=_('library'), max_length=50, blank=False)
-    content = models.TextField(verbose_name=_('content'), max_length=50, blank=True, null=True,)
+    content = models.TextField(verbose_name=_('content'), blank=True, null=True,)
     custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'library'
+        constraints = [
+            models.UniqueConstraint(
+                fields=["custom_user", "title"],
+                name="library_unique"
+            )
+        ]
+
+
+class Category(models.Model):
+    title = models.CharField(verbose_name=_('category'), max_length=50, blank=False)
+    content = models.TextField(verbose_name=_('content'), blank=True, null=True,)
+    custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    library = models.ForeignKey(Library, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'category'
+        constraints = [
+            models.UniqueConstraint(
+                fields=["custom_user", "library", "title"],
+                name="category_unique"
+            )
+        ]
