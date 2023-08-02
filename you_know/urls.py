@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import top, user_auth, user_setting, library
+from .views import top, user_auth, user_setting, library, category
 
 app_name = 'you_know'
 urlpatterns = [
@@ -19,4 +19,5 @@ urlpatterns = [
   path('user_setting/user/delete_account_reason/<token>', user_setting.UserDeleteAccountReasonView.as_view(), name='delete_account_reason'),
   path('user_setting/user/delete_account_reason_done/', user_setting.UserDeleteAccountReasonDoneView.as_view(), name='delete_account_reason_done'),
   path('library/', library.LibraryIndexView.as_view(), name='library_index'),
+  path('category/', category.CategoryIndexView.as_view(), name='category_index'),
 ]
