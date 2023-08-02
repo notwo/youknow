@@ -125,7 +125,7 @@ class DeleteAccountReason(models.Model):
 
 
 class Library(models.Model):
-    title = models.CharField(verbose_name=_('library'), max_length=50, blank=False)
+    title = models.CharField(verbose_name=_('title'), max_length=50, blank=False)
     content = models.TextField(verbose_name=_('content'), blank=True, null=True,)
     custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -142,7 +142,7 @@ class Library(models.Model):
 
 
 class Category(models.Model):
-    title = models.CharField(verbose_name=_('category'), max_length=50, blank=False)
+    title = models.CharField(verbose_name=_('title'), max_length=50, blank=False)
     content = models.TextField(verbose_name=_('content'), blank=True, null=True,)
     custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     library = models.ForeignKey(Library, on_delete=models.CASCADE)
@@ -155,5 +155,24 @@ class Category(models.Model):
             models.UniqueConstraint(
                 fields=["custom_user", "library", "title"],
                 name="category_unique"
+            )
+        ]
+
+
+class Keyword(models.Model):
+    title = models.CharField(verbose_name=_('title'), max_length=50, blank=False)
+    content = models.TextField(verbose_name=_('content'), blank=True, null=True,)
+    custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    library = models.ForeignKey(Library, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True,)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'keyword'
+        constraints = [
+            models.UniqueConstraint(
+                fields=["custom_user", "library", "category", "title"],
+                name="keyword_unique"
             )
         ]
