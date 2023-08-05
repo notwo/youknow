@@ -1,8 +1,10 @@
 {% extends 'you_know/base.html' %}
 
 {% load static %}
+{% load md5url %}
 
 {% block head %}
+<link type="text/css" rel="stylesheet" href="{% md5url 'you_know/css/library/index.css' %}">
 <title>登録済みライブラリ一覧</title>
 {% endblock %}
 
@@ -11,9 +13,17 @@
 
 {% block header %}
 <nav class="menu-wrap">
-  <ul class="menu">
-    <li></li>
-  </ul>
+  <section class="flex-contents">
+    <section class="service-icon">アイコンとか</section>
+    <ul class="menu">
+      {% if user.is_authenticated %}
+      <li><a class="sp-char-mini" href="/you_know/">Profile</a></li>
+      {% else %}
+      <li><a href="{% url 'you_know:signup' %}" class="btn btn-primary">Signup</a></li>
+      <li><a href="{% url 'you_know:login' %}" class="btn btn-primary">Login</a></li>
+      {% endif %}
+    </ul>
+  </section>
 </nav>
 {% endblock %}
 
