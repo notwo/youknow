@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
 
 
-class LibraryIndexView(TemplateView):
+class LibraryViews(TemplateView):
     template_name = "you_know/library/index.html"

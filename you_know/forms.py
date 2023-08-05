@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django import forms
-from .models import CustomUser, DeleteAccountReason
+from .models import CustomUser, DeleteAccountReason, Library
 
 
 class YouKnowUserChangeForm(UserChangeForm):

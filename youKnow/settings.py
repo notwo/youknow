@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_static_md5url',
+    'rest_framework',
     'you_know.apps.YouKnowConfig',
 ]
 
