@@ -1,5 +1,9 @@
-from django.urls import path
+from rest_framework import routers
+from django.urls import path, include
 from .views import top, user_auth, user_setting, library, category, keyword
+
+router = routers.DefaultRouter()
+router.register('libraries', library.LibraryAjaxViewSet)
 
 app_name = 'you_know'
 urlpatterns = [
@@ -18,7 +22,8 @@ urlpatterns = [
   path('user_setting/user/delete_done/', user_setting.UserDeleteDoneView.as_view(), name='delete_account_done'),
   path('user_setting/user/delete_account_reason/<token>', user_setting.UserDeleteAccountReasonView.as_view(), name='delete_account_reason'),
   path('user_setting/user/delete_account_reason_done/', user_setting.UserDeleteAccountReasonDoneView.as_view(), name='delete_account_reason_done'),
-  path('libraries/', library.LibraryViews.as_view(), name='libraries'),
-  path('categories/<int:library_id>/', category.CategoryIndexView.as_view(), name='categories'),
-  path('keywords/', keyword.KeywordIndexView.as_view(), name='keywords'),
+  path('library/', library.LibraryViews.as_view(), name='library'),
+  path('libraries/', include(router.urls)),
+  path('category/<int:library_id>/', category.CategoryIndexView.as_view(), name='category'),
+  path('keyword/', keyword.KeywordIndexView.as_view(), name='keyword'),
 ]

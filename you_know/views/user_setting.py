@@ -63,7 +63,6 @@ class UserDeleteAccountReasonView(TemplateView, ModelFormMixin):
 
     def post(self, request, *args, **kwargs):
         token = kwargs.get('token')
-        print(DeleteMailToken.objects.filter(token=token))
         DeleteMailToken.objects.filter(token=token).delete()
         form = self.get_form()
         if form.is_valid():
