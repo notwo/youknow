@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'you_know.apps.YouKnowConfig',  # 追加分
+    'django_static_md5url',
+    'you_know.apps.YouKnowConfig',
 ]
 
 MIDDLEWARE = [
