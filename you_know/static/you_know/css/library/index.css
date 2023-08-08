@@ -33,3 +33,7 @@
 main {
   margin: 12rem 8rem;
 }
+
+.modal {
+  display: none;
+}

@@ -44,3 +44,7 @@ class LibraryUpdateForm(forms.ModelForm):
     class Meta:
         model = Library
         fields = ('title', 'content')
+        labels = {
+            'title': 'ライブラリ名',
+            'content': '説明'
+        }

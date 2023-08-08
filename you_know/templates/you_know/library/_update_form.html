@@ -1,8 +1,8 @@
 <section class="modal">
   <form action="" method="POST">
     {% for field in form %}
-    <section class="form-group">
-      <label class="" for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+    <label class="" for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+    <section class="form">
       {{ field }}
     </section>
     {% endfor %}
