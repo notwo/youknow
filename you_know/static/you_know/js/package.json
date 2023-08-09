@@ -2,8 +2,8 @@
   "name": "youknow",
   "version": "1.0.0",
   "description": "記法は[基本的な書き方とフォーマットの構文](https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)に従う\r ___",
-  "main": "index.js",
   "scripts": {
+    "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,9 +12,11 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
     "@vue/compiler-sfc": "^3.3.4",
-    "vue": "^3.2.36",
-    "vue-loader": "^16.1.2",
-    "vue-style-loader": "^4.1.3"
+    "eslint": "^8.46.0",
+    "eslint-plugin-vue": "^9.16.1",
+    "vite": "^4.4.8",
+    "vue": "^3.3.4"
   }
 }
