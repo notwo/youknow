@@ -1,0 +1,49 @@
+<template>
+  <section id="" class="btn-register floating">
+    <a href=""></a>
+  </section>
+</template>
+
+<script>
+/*
+import { defineComponent } from '@vue/composition-api'
+
+export default defineComponent({
+  setup() {
+  },
+})
+*/
+</script>
+
+<style>
+.btn-register {
+  position: fixed;
+  top: 8rem;
+  right: 6rem;
+  z-index: 9999;
+}
+.btn-register a {
+  display: block;
+  position: relative;
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: rgba(0,180,180,.6);
+  overflow: hidden;
+}
+.btn-register a:before {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -23%;
+  margin-top: -28%;
+  color: #FFF;
+  font-size: 2rem;
+  content: "+";
+}
+
+.floating {
+  transition: .6s;
+}
+</style>
