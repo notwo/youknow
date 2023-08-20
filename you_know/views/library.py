@@ -18,3 +18,4 @@ class LibraryViews(TemplateView, ModelFormMixin):
 class LibraryAjaxViewSet(viewsets.ModelViewSet):
     serializer_class = LibrarySerializer
     queryset = Library.objects.all().order_by('-created_at')
+    filter_fields = ('title', 'content', 'created_at')

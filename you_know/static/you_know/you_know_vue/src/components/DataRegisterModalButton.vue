@@ -1,18 +1,26 @@
 <template>
   <section id="" class="btn-register floating">
-    <a href=""></a>
+    <a @click="openModal"></a>
   </section>
 </template>
 
-<script>
-/*
-import { defineComponent } from '@vue/composition-api'
+<script lang="ts">
+import { defineComponent } from "vue";
 
 export default defineComponent({
+  name: "DataRegisterButton",
   setup() {
-  },
+    const openModal = () => {
+      const modal = document.getElementsByClassName('overlay') as HTMLCollectionOf<HTMLElement>;
+      modal[0].classList.add('visible');
+      console.log(modal);
+    };
+
+    return {
+      openModal,
+    };
+  }
 })
-*/
 </script>
 
 <style>
@@ -28,6 +36,7 @@ export default defineComponent({
   border-radius: 50%;
   width: 3.5rem;
   height: 3.5rem;
+  cursor: pointer;
   background-color: rgba(0,180,180,.6);
   overflow: hidden;
 }
