@@ -1,6 +1,10 @@
 記法は[基本的な書き方とフォーマットの構文](https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)に従う
 ___
 
+sqliteを開く
+sqlite-tools-win32-x86-3420000/sqlite3.exeで以下を実行
+.open "C:/Users/07k11/Desktop/work/youknow/db.sqlite3"
+
 # DBの確認方法
 ## sqlite
 ### Win

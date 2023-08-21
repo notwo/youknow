@@ -17,7 +17,7 @@
     <section class="form-group">
       {% csrf_token %}
       <button type="submit" class="btn btn-danger btn-block">アカウント削除する</button>
-      <a href="{% url 'you_know:profile' user.uuid %}">キャンセル</a>
+      <a href="{% url 'you_know:profile' user.username %}">キャンセル</a>
     </section>
   </form>
 </article>
