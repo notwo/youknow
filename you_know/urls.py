@@ -1,8 +1,9 @@
 from rest_framework import routers
 from django.urls import path, include
-from .views import top, user_auth, user_setting, library, category, keyword
+from .views import top, user_auth, user_setting, custom_user, library, category, keyword
 
 router = routers.DefaultRouter()
+router.register(r'users', custom_user.CustomUserAjaxViewSet)
 router.register(r'libraries', library.LibraryAjaxViewSet)
 
 app_name = 'you_know'

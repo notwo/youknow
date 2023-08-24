@@ -6,6 +6,7 @@ from ..models import Library
 from ..serializers import LibrarySerializer
 
 
+# これは最終的に消す
 class LibraryViews(TemplateView, ModelFormMixin):
     form_class = LibraryUpdateForm
     model = Library
@@ -18,4 +19,4 @@ class LibraryViews(TemplateView, ModelFormMixin):
 class LibraryAjaxViewSet(viewsets.ModelViewSet):
     serializer_class = LibrarySerializer
     queryset = Library.objects.all().order_by('-created_at')
-    filter_fields = ('title', 'content', 'created_at')
+    filter_fields = ('title', 'content', 'custom_user_id')

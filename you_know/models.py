@@ -14,7 +14,7 @@ import hashlib
 class UserManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
         email = self.normalize_email(email)
-        user = self.model(email = email, **extra_fields)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 
@@ -75,7 +75,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     EMAIL_FIELD = "email"
-    USERNAME_FIELD = "username"
+    USERNAME_FIELD = "email"
     REQUIRE_FIELDS = ["email"]
 
     class Meta:

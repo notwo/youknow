@@ -4,7 +4,6 @@ from django.urls import reverse, reverse_lazy
 from ..forms import UserUpdateForm, UserDeleteAccountReasonForm
 from ..models import CustomUser, DeleteAccountReason, DeleteMailToken
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.http import Http404

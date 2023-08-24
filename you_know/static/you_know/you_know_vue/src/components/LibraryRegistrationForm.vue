@@ -30,16 +30,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue';
+import { defineComponent, reactive, onMounted } from 'vue';
 import axios, { AxiosResponse, AxiosError } from "axios";
+import { useRoute } from "vue-router";
 import { useVuelidate } from "@vuelidate/core";
-import { required, minLength, helpers } from "@vuelidate/validators"
+import { required, helpers } from "@vuelidate/validators";
 import { requiredMsg } from '../plugin/validatorMessage';
 
 export default defineComponent({
   name: 'LibraryRegistrationForm',
   components: {},
   setup() {
+
     let state = reactive({
       title: '',
       content: ''
@@ -53,35 +55,61 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, state);
 
-    interface LibraryResponse {
-      //
-    }
+    interface UserResponse {
+      data: {}
+    };
+
     interface ErrorResponse {
-      error: string
-    }
+      message: String,
+      name: String,
+      code: String
+    };
 
     interface LibraryRequest {
-      title: string
-      content: string
+      custom_user: String,
+      title: String
+      content: String
     };
+
+    const uuid = window.localStorage.getItem(['UUID']);
+    const username = window.localStorage.getItem(['USERNAME']);
+
+    onMounted(() => {
+      if (!uuid) {
+        (async () => {
+          const route = useRoute();
+          await axios.get<UserResponse>('http://127.0.0.1:8000/api/users/', {
+            params: { username: username }
+          })
+          .then((response: AxiosResponse) => {
+            window.localStorage.setItem(['UUID'], response.data[0].uuid);
+          })
+          .catch((e: AxiosError<ErrorResponse>) => {
+            console.log(`${e.message} ( ${e.name} ) code: ${e.code}`);
+          });
+        })();
+      }
+    });
 
     // ----------------------- events -----------------------
     const onSubmit = async () => {
       const requestParam: LibraryRequest = {
-        title: document.getElementById('library_title'),
-        content: document.getElementById('library_content')
-      }
+        custom_user: uuid,
+        title: document.getElementById('library_title').value,
+        content: document.getElementById('library_content').value
+      };
+      console.log(requestParam);
 
-      axios.post<LibraryResponse>('http://127.0.0.1:8000/api/libraries/', requestParam)
-           .then((response: AxiosResponse) => {
-              console.log(response);
-              state.title = '';
-              state.content = '';
-              // ここでLibraryListを表示
-            })
-           .catch((e: AxiosError<ErrorResponse>) => {
-              console.log(e)
-            });
+      axios.post('http://127.0.0.1:8000/api/libraries/', requestParam)
+      .then((response: AxiosResponse) => {
+        console.log(response);
+        state.title = '';
+        state.content = '';
+        // ここで追加されたLibraryItemを表示
+      })
+      .catch((e: AxiosError<ErrorResponse>) => {
+        console.log(`${e.message} ( ${e.name} ) code: ${e.code}`);
+      });
     };
 
     const closeModal = (event: HTMLButtonEvent) => {

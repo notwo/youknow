@@ -29,11 +29,12 @@ export default defineComponent({
     onMounted(() => {
       interface LibraryResponse {
         data: []
-      }
+      };
       interface ErrorResponse {
         error: string
-      }
+      };
 
+      // ----------------------- events -----------------------
       axios.get<LibraryResponse>('http://127.0.0.1:8000/api/libraries/')
           .then((response: AxiosResponse) => {
             console.log(response)

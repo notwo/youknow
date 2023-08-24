@@ -3,18 +3,40 @@
 </template>
 
 <script lang="ts">
-const modal = document.getElementsByClassName('search-wrap') as HTMLCollectionOf<HTMLElement>;
-console.log(modal)
-modal[0].style.display = 'none';
-/*
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from 'vue';
+import axios, { AxiosResponse, AxiosError } from "axios";
 
 export default defineComponent({
   setup() {
-    
+    interface UserResponse {
+      data: {}
+    };
+
+    interface ErrorResponse {
+      message: String,
+      name: String,
+      code: String
+    };
+
+    // ----------------------- events -----------------------
+    const uuid = window.localStorage.getItem(['UUID']);
+    const username = window.localStorage.getItem(['USERNAME']);
+
+    if (!uuid) {
+      (async () => {
+        await axios.get<UserResponse>('http://127.0.0.1:8000/api/users/', {
+          params: { username: username }
+        })
+        .then((response: AxiosResponse) => {
+          window.localStorage.setItem(['UUID'], response.data[0].uuid);
+        })
+        .catch((e: AxiosError<ErrorResponse>) => {
+          console.log(`${e.message} ( ${e.name} ) code: ${e.code}`);
+        });
+      })();
+    }
   },
 })
-*/
 </script>
 
 <style scoped>
