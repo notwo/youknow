@@ -14,5 +14,5 @@ class LibrarySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Library
-        fields = ["title", "content", "custom_user", "custom_user_id"]
-        read_only_fields = ('id',)
+        fields = ["id", "title", "content", "custom_user", "custom_user_id", "created_at"]
+        read_only_fields = ('id', 'created_at')

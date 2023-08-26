@@ -1,24 +1,30 @@
 <template>
-  <nav class="menu-wrap">
-    <section class="flex-contents">
-      <section class="service-icon">サービスアイコン</section>
-      <section class="search-wrap">
-        <span class="">検索アイコン</span>
-        <input type="text" class="searchbox">
+  <header>
+    <nav class="menu-wrap">
+      <section class="flex-contents">
+        <section class="service-icon">サービスアイコン</section>
+        <section class="search-wrap">
+          <span class="">検索アイコン</span>
+          <input type="text" class="searchbox">
+        </section>
+        <section class="menu">
+          <ul class="menu-item">
+            <li><a class="sp-char-mini" href="/you_know/">Profile</a></li>
+            <li><a class="sp-char-mini" href="/you_know/library/">登録済み<br>ライブラリ</a></li>
+          </ul>
+        </section>
       </section>
-      <section class="menu">
-        <ul class="menu-item">
-          <li><a class="sp-char-mini" href="/you_know/">Profile</a></li>
-          <li><a class="sp-char-mini" href="/you_know/library/">登録済み<br>ライブラリ</a></li>
-        </ul>
-      </section>
-    </section>
-  </nav>
+    </nav>
+  </header>
 </template>
 
 <script setup></script>
 
 <style scoped>
+header.fixed {
+  position: fixed;
+}
+
 nav {
   width: 100%;
   z-index: 10000;
@@ -40,6 +46,7 @@ nav {
 }
 .menu-item {
   display: flex;
+  justify-content: center;
 }
 
 .search-wrap {

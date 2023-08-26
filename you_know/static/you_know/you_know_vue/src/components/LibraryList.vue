@@ -1,9 +1,9 @@
 <template>
-  <h3>librarylist</h3>
   <article id="library-list">
     <LibraryItem
       v-for="library in state.libraryList"
       :key="library.id"
+      :id="library.id"
       :title="library.title"
       :content="library.content"
       :created_at="library.created_at"
@@ -37,7 +37,6 @@ export default defineComponent({
       // ----------------------- events -----------------------
       axios.get<LibraryResponse>('http://127.0.0.1:8000/api/libraries/')
           .then((response: AxiosResponse) => {
-            console.log(response)
             if (response.data.length >= 1) {
               state.libraryList = response.data;
             } else {
@@ -54,3 +53,11 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+#library-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+</style>

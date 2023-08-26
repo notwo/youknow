@@ -30,9 +30,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted } from 'vue';
+import { defineComponent, reactive, onMounted, HTMLAttributes } from 'vue';
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { useRoute } from "vue-router";
 import { useVuelidate } from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
 import { requiredMsg } from '../plugin/validatorMessage';
@@ -53,7 +52,7 @@ export default defineComponent({
       }
     };
 
-    const v$ = useVuelidate(rules, state);
+    let v$ = useVuelidate(rules, state);
 
     interface UserResponse {
       data: {}
@@ -77,7 +76,6 @@ export default defineComponent({
     onMounted(() => {
       if (!uuid) {
         (async () => {
-          const route = useRoute();
           await axios.get<UserResponse>('http://127.0.0.1:8000/api/users/', {
             params: { username: username }
           })
@@ -92,20 +90,17 @@ export default defineComponent({
     });
 
     // ----------------------- events -----------------------
-    const onSubmit = async () => {
+    const onSubmit = async (event: HTMLButtonEvent) => {
       const requestParam: LibraryRequest = {
         custom_user: uuid,
         title: document.getElementById('library_title').value,
         content: document.getElementById('library_content').value
       };
-      console.log(requestParam);
 
-      axios.post('http://127.0.0.1:8000/api/libraries/', requestParam)
+      await axios.post('http://127.0.0.1:8000/api/libraries/', requestParam)
       .then((response: AxiosResponse) => {
-        console.log(response);
-        state.title = '';
-        state.content = '';
         // ここで追加されたLibraryItemを表示
+        closeModal(event);
       })
       .catch((e: AxiosError<ErrorResponse>) => {
         console.log(`${e.message} ( ${e.name} ) code: ${e.code}`);
@@ -114,8 +109,12 @@ export default defineComponent({
 
     const closeModal = (event: HTMLButtonEvent) => {
       event.preventDefault();
+      // フォーム初期化
+      state.title = '';
+      state.content = '';
       const modal = document.getElementsByClassName('overlay') as HTMLCollectionOf<HTMLElement>;
       modal[0].classList.remove('visible');
+      v$.value.$reset();
     };
 
     return {
@@ -161,7 +160,7 @@ export default defineComponent({
   position: relative;
   width: 2em;
   height: 2em;
-  margin-left:auto;
+  margin-left: auto;
 }
 .modal .close::before, .modal .close::after {
   display: block;
@@ -198,6 +197,7 @@ export default defineComponent({
 }
 
 input.error {
+  border-color: rgba(220,0,0,0.3);
   background-color: rgba(220,0,0,0.3);
 }
 

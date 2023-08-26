@@ -1,20 +1,17 @@
 <template>
   <section class="full-layout">
-    <header>
+    <section class="main">
       <NavigationHeader />
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&display=swap">
-    </header>
 
-    <main class="container">
-      <section class="main-right-pane"></section>
-      <router-view></router-view>
-      <section class="main-left-pane"></section>
-    </main>
+      <main class="container">
+        <section class="main-right-pane"></section>
+        <router-view></router-view>
+        <section class="main-left-pane"></section>
+      </main>
+    </section>
 
-    <FooterInformation />
   </section>
+  <FooterInformation />
 </template>
 
 <script lang="ts">
@@ -30,19 +27,24 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.container {
+.full-layout {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.main {
+  flex: 1;
+}
+
+.container {
   margin: 0 auto;
+  max-width: 1100px;
   background: rgb(240, 242, 242);
 }
 
 .main-right-pane  {
-  display: flex;
-  justify-content: left;
 }
 .main-left-pane  {
-  display: flex;
-  justify-content: right;
 }
 </style>

@@ -13,7 +13,6 @@ export default defineComponent({
     const openModal = () => {
       const modal = document.getElementsByClassName('overlay') as HTMLCollectionOf<HTMLElement>;
       modal[0].classList.add('visible');
-      console.log(modal);
     };
 
     return {
@@ -23,7 +22,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 .btn-register {
   position: fixed;
   top: 8rem;
