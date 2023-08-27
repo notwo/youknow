@@ -22,7 +22,7 @@
           <textarea v-model="state.content" id="library_content" placeholder="新規ライブラリの説明"></textarea>
         </section>
         <section class="button">
-          <button type="button" @click="onSubmit" :disabled="(state.title === '')">ライブラリ追加</button>
+          <button type="button" @click="onSubmit" :disabled="(v$.title.$errors.length === 0) ? false : true">ライブラリ追加</button>
         </section>
       </form>
     </section>
