@@ -30,11 +30,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted, inject } from 'vue';
+import { defineComponent, reactive, onMounted, inject, HTMLAttributes } from 'vue';
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { useVuelidate } from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
-import { requiredMsg } from '@/plugin/validatorMessage';
+import { requiredMsg, duplicateMsg, duplicated } from '@/plugin/validatorMessage';
+import func from '../../vue-temp/vue-editor-bridge';
 
 export default defineComponent({
   name: 'LibraryRegistrationForm',
@@ -49,7 +50,13 @@ export default defineComponent({
 
     const rules = {
       title: {
-        required: helpers.withMessage(requiredMsg('タイトル'), required)
+        required: helpers.withMessage(requiredMsg('タイトル'), required),
+        duplicated: helpers.withMessage(duplicateMsg('タイトル'), function (val: String) {
+          const _titles = document.getElementsByClassName('title');
+          if (_titles.length <= 0) { return true; }
+          const _target = Array.from(_titles).find((element) => element.innerText === val);
+          return !_target;
+        })
       }
     };
 
@@ -123,7 +130,7 @@ export default defineComponent({
       v$,
       state,
       onSubmit,
-      closeModal
+      closeModal,
     };
   }
 });
