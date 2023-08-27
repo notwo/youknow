@@ -30,16 +30,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted, HTMLAttributes } from 'vue';
+import { defineComponent, reactive, onMounted, inject } from 'vue';
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { useVuelidate } from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
-import { requiredMsg } from '../plugin/validatorMessage';
+import { requiredMsg } from '@/plugin/validatorMessage';
 
 export default defineComponent({
   name: 'LibraryRegistrationForm',
   components: {},
   setup() {
+    const store = inject('library');
 
     let state = reactive({
       title: '',
@@ -73,6 +74,7 @@ export default defineComponent({
     const uuid = window.localStorage.getItem(['UUID']);
     const username = window.localStorage.getItem(['USERNAME']);
 
+    // あとで消す
     onMounted(() => {
       if (!uuid) {
         (async () => {
@@ -99,7 +101,7 @@ export default defineComponent({
 
       await axios.post('http://127.0.0.1:8000/api/libraries/', requestParam)
       .then((response: AxiosResponse) => {
-        // ここで追加されたLibraryItemを表示
+        store.add(response.data);
         closeModal(event);
       })
       .catch((e: AxiosError<ErrorResponse>) => {
@@ -109,11 +111,11 @@ export default defineComponent({
 
     const closeModal = (event: HTMLButtonEvent) => {
       event.preventDefault();
+      const modal = document.getElementsByClassName('overlay') as HTMLCollectionOf<HTMLElement>;
+      modal[0].classList.remove('visible');
       // フォーム初期化
       state.title = '';
       state.content = '';
-      const modal = document.getElementsByClassName('overlay') as HTMLCollectionOf<HTMLElement>;
-      modal[0].classList.remove('visible');
       v$.value.$reset();
     };
 

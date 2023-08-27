@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 import axios, { AxiosResponse, AxiosError } from "axios";
 
 export default defineComponent({
@@ -16,6 +16,8 @@ export default defineComponent({
     id: Number,
     title: String,
     content: String,
+    custom_user: String,
+    custom_user_id: String,
     created_at: String,
   },
   setup(props) {
@@ -25,11 +27,14 @@ export default defineComponent({
       code: String
     };
 
+    const store = inject('library');
     const removeLibrary = async (event: HTMLButtonEvent) => {
       if (!window.confirm(`ライブラリ「${props.title}」が削除されますが宜しいですか？`)) {
         return;
       }
 
+      // api実行前に呼ばないとstoreの中身が検索できない
+      store.remove(props.id);
       const id = event.currentTarget.getAttribute('data-id');
       await axios.delete(`http://127.0.0.1:8000/api/libraries/${id}`)
       .then((response: AxiosResponse) => {

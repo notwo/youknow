@@ -22,6 +22,7 @@ export default defineComponent({
     const uuid = window.localStorage.getItem(['UUID']);
     const username = window.localStorage.getItem(['USERNAME']);
 
+    // あとで消す
     if (!uuid) {
       (async () => {
         await axios.get<UserResponse>('http://127.0.0.1:8000/api/users/', {

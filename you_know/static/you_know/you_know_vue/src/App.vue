@@ -15,13 +15,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, provide } from "vue";
+import { useStore } from '@/store/index';
 import NavigationHeader from "@/components/NavigationHeader.vue";
 import FooterInformation from "@/components/FooterInformation.vue";
 
 export default defineComponent({
   name: "App",
   components: { NavigationHeader, FooterInformation },
+  setup() {
+    const store = useStore();
+    provide('library', store);
+  }
 });
 
 </script>
