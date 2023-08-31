@@ -26,8 +26,9 @@ export function useStore() {
 
   function search<T>(list: T[]) {
     restore();
-    list.map((obj: object) => {
-      const _target = items.list.filter(_item => _item.id !== obj.id);
+    const _target_ids = list.map((_obj: Object) => { return _obj.id });
+    list.map((_obj: object) => {
+      const _target = items.list.filter(_item => !_target_ids.includes(_item.id));
       _target.map((_deleteTarget: Object) => {
         const _removeIndex = items.list.indexOf(_deleteTarget);
         items.list.splice(_removeIndex, 1);
