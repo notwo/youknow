@@ -19,6 +19,7 @@ export default defineComponent({
     custom_user: String,
     custom_user_id: String,
     created_at: String,
+    updated_at: String,
   },
   setup(props) {
     interface ErrorResponse {

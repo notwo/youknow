@@ -3,10 +3,6 @@
     <nav class="menu-wrap">
       <section class="flex-contents">
         <section class="service-icon">サービスアイコン</section>
-        <section class="search-wrap">
-          <span class="">検索アイコン</span>
-          <input type="text" class="searchbox">
-        </section>
         <section class="menu">
           <ul class="menu-item">
             <li><a class="sp-char-mini" href="/you_know/">Profile</a></li>

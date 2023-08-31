@@ -24,6 +24,7 @@ urlpatterns = [
   path('user_setting/user/delete_account_reason/<token>', user_setting.UserDeleteAccountReasonView.as_view(), name='delete_account_reason'),
   path('user_setting/user/delete_account_reason_done/', user_setting.UserDeleteAccountReasonDoneView.as_view(), name='delete_account_reason_done'),
   path('library/', library.LibraryViews.as_view(), name='library'),
+  path('libraries/search', library.SearchView.as_view(), name='library_search'),
   path('category/<int:library_id>/', category.CategoryIndexView.as_view(), name='category'),
   path('keyword/', keyword.KeywordIndexView.as_view(), name='keyword'),
 ]

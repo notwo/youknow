@@ -22,7 +22,7 @@
           <textarea v-model="state.content" id="library_content" placeholder="新規ライブラリの説明"></textarea>
         </section>
         <section class="button">
-          <button type="button" @click="onSubmit" :disabled="(v$.title.$errors.length === 0) ? false : true">ライブラリ追加</button>
+          <button type="button" @click="onSubmit" :disabled="(v$.title.$errors.length === 0 && state.title !== '') ? false : true">ライブラリ追加</button>
         </section>
       </form>
     </section>
@@ -52,6 +52,7 @@ export default defineComponent({
       title: {
         required: helpers.withMessage(requiredMsg('タイトル'), required),
         duplicated: helpers.withMessage(duplicateMsg('タイトル'), function (val: String) {
+          // API経由で結果を返却させるように後で修正
           const _titles = document.getElementsByClassName('title');
           if (_titles.length <= 0) { return true; }
           const _target = Array.from(_titles).find((element) => element.innerText === val);

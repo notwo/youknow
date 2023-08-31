@@ -9,6 +9,7 @@
       :custom_user="library.custom_user"
       :custom_user_id="library.custom_user_id"
       :created_at="library.created_at"
+      :updated_at="library.updated_at"
     />
   </article>
 </template>

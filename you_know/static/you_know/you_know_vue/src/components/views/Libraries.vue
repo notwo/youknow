@@ -1,6 +1,7 @@
 <template>
   <DataRegisterModalButton />
   <LibraryRegistrationForm />
+  <LibrarySearchForm />
   <LibraryList />
 </template>
 
@@ -8,6 +9,7 @@
 import { defineComponent } from 'vue';
 import DataRegisterModalButton from '@/components/DataRegisterModalButton.vue';
 import LibraryRegistrationForm from '@/components/LibraryRegistrationForm.vue';
+import LibrarySearchForm from '@/components/LibrarySearchForm.vue';
 import LibraryList from '@/components/LibraryList.vue';
 
 export default defineComponent({
@@ -15,10 +17,10 @@ export default defineComponent({
   components: {
     DataRegisterModalButton,
     LibraryRegistrationForm,
+    LibrarySearchForm,
     LibraryList
   },
   setup () {
-    //
   }
 });
 </script>
