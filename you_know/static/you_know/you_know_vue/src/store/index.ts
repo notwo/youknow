@@ -15,11 +15,11 @@ export function useStore() {
   }
 
   function remove(id: Number) {
-    let _target = items.list.filter(obj => obj.id === id);
+    let _target = items.list.filter(_obj => _obj.id === id);
     let _removeIndex = items.list.indexOf(_target[0]);
     items.list.splice(_removeIndex, 1);
 
-    _target = backupList.filter(obj => obj.id === id);
+    _target = backupList.filter(_obj => _obj.id === id);
     _removeIndex = backupList.indexOf(_target[0]);
     backupList.splice(_removeIndex, 1);
   }
@@ -40,8 +40,8 @@ export function useStore() {
     if (items.list.length === backupList.length) { return; }
 
     const length = items.list.length;
-    backupList.map((obj: Object) => {
-      items.list.push(obj);
+    backupList.map((_obj: Object) => {
+      items.list.push(_obj);
     });
     for(let _i = 0;_i < length;_i++) {
       items.list.shift();
