@@ -1,0 +1,42 @@
+/* navigation menu */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+}
+
+.menu-wrap {
+  padding: 0.2em;
+}
+ul.menu li {
+  padding: 0.5em 0.1em;
+  font-size: 1.0rem;
+  font-weight: 700;
+}
+
+
+/*
+ * メインコンテンツ
+ */
+.flex-contents {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+/*
+ * 基本タグ
+ */
+ol,ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+a {
+  text-decoration: none;
+}

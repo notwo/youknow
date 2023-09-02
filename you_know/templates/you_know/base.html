@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
+    {% load static %}
+    {% load md5url %}
+
     <meta charset="UTF-8">
+    <meta name="description" content="あなたの知識の集約サイト - You Know">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
+    <link type="text/css" rel="stylesheet" href="{% md5url 'you_know/css/base.css' %}">
+    {% block head %}{% endblock %}
   </head>
   <body>
     {% block h1 %}{% endblock %}
     <header>
-    {% block header %}{% endblock %}
+      {% block header %}{% endblock %}
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&display=swap">
     </header>
     <main>
-    {% block content %}{% endblock %}
+      {% block content %}{% endblock %}
     </main>
   </body>
 </html>

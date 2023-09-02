@@ -1,0 +1,12 @@
+<section class="modal">
+  <form action="" method="POST">
+    {% for field in form %}
+    <label class="" for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+    <section class="form">
+      {{ field }}
+    </section>
+    {% endfor %}
+    {% csrf_token %}
+    <button type="button" class="btn btn-primary btn-block">ライブラリ追加</button>
+  </form>
+</section>

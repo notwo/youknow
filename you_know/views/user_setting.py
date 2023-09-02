@@ -3,27 +3,30 @@ from django.views.generic.edit import ModelFormMixin
 from django.urls import reverse, reverse_lazy
 from ..forms import UserUpdateForm, UserDeleteAccountReasonForm
 from ..models import CustomUser, DeleteAccountReason, DeleteMailToken
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.http import Http404
 
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "you_know/user_setting/profile.html"
     form_class = UserUpdateForm
     model = CustomUser
-
-    def get_queryset(self):
-        queryset = CustomUser.objects.filter(uuid=self.request.user.uuid)
-        return queryset
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    login_url = '/login/'
 
     def get_success_url(self, **kwargs):
-        return reverse("you_know:profile", kwargs={'pk': self.kwargs.get('pk')})
+        return reverse_lazy("you_know:profile", kwargs={'username': self.object})
 
 
-class UserDeleteView(DeleteView):
+class UserDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "you_know/user_setting/delete_account.html"
     model = CustomUser
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    login_url = '/login/'
 
     def get_success_url(self, **kwargs):
         token = DeleteMailToken.create(None, self.request.user.email)
@@ -63,7 +66,6 @@ class UserDeleteAccountReasonView(TemplateView, ModelFormMixin):
 
     def post(self, request, *args, **kwargs):
         token = kwargs.get('token')
-        print(DeleteMailToken.objects.filter(token=token))
         DeleteMailToken.objects.filter(token=token).delete()
         form = self.get_form()
         if form.is_valid():

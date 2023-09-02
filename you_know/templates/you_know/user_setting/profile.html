@@ -1,6 +1,7 @@
 {% extends 'you_know/base.html' %}
 
-{% block title %}
+{% block head %}
+<title>プロフィール</title>
 {% endblock %}
 
 {% block header %}
@@ -23,6 +24,6 @@
       <a href="{% url 'you_know:index' %}">戻る</a>
     </section>
   </form>
-  <a href="{% url 'you_know:delete_account' user.uuid %}">アカウント削除する</a>
+  <a href="{% url 'you_know:delete_account' user.username %}">アカウント削除する</a>
 </article>
 {% endblock %}
