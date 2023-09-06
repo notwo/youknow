@@ -5,8 +5,8 @@ from .models import Library, CustomUser
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ["uuid"]
-        read_only_fields = ('uuid',)
+        fields = ["id"]
+        read_only_fields = ('id',)
 
 
 class LibrarySerializer(serializers.ModelSerializer):
