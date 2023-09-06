@@ -79,7 +79,6 @@ export default defineComponent({
     };
 
     const uuid = window.localStorage.getItem(['UUID']);
-    console.log(uuid);
     const username = window.localStorage.getItem(['USERNAME']);
 
     // あとで消す

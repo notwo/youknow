@@ -34,7 +34,7 @@ class UserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    id = models.UUIDField(
+    uuid = models.UUIDField(
         default=uuid.uuid4,
         primary_key=True,
         db_index=True,
