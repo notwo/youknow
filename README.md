@@ -13,3 +13,8 @@ python manage.py runserver --traceback
 ```Bash
 npm run dev
 ```
+
+### sqlite3
+```Bash
+.open C:/Users/07k11/Desktop/work/youknow/db.sqlite3
+```

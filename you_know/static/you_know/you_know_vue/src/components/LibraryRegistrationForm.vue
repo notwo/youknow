@@ -30,12 +30,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted, inject, HTMLAttributes } from 'vue';
+import { defineComponent, reactive, onMounted, inject } from 'vue';
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { useVuelidate } from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
 import { requiredMsg, duplicateMsg, duplicated } from '@/plugin/validatorMessage';
-import func from '../../vue-temp/vue-editor-bridge';
 
 export default defineComponent({
   name: 'LibraryRegistrationForm',
@@ -61,7 +60,7 @@ export default defineComponent({
       }
     };
 
-    let v$ = useVuelidate(rules, state);
+    const v$ = useVuelidate(rules, state);
 
     interface UserResponse {
       data: {}
@@ -206,18 +205,19 @@ export default defineComponent({
   background-color: red;
 }
 
-input.error {
-  border-color: rgba(220,0,0,0.3);
-  background-color: rgba(220,0,0,0.3);
-}
-
 #library_content {
   resize: none;
   width: 40em;
   height: 10em;
 }
 
+input.error {
+  border-color: rgba(220,0,0,0.3);
+  background-color: rgba(220,0,0,0.3);
+}
+
+
 .error-message {
-  color: red;
+  color: rgba(220,0,0,0.3);
 }
 </style>
