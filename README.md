@@ -17,7 +17,7 @@ python manage.py migrate you_know
 
 #### マイグレーションやり直し手順
 ```Bash
-.open ~/Desktop/work/youknow/db.sqlite3
+.open ../../youknow/db.sqlite3
 drop table <テーブル名>;
 select * from django_migrations;
 delete from django_migrations where id=<id>;
@@ -49,5 +49,5 @@ npm run dev
 
 ### sqlite3
 ```Bash
-.open ~/work/youknow/db.sqlite3
+.open ../../youknow/db.sqlite3
 ```

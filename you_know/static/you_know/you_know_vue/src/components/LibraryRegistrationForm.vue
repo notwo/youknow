@@ -34,11 +34,7 @@ import { defineComponent, reactive, onMounted, inject } from 'vue';
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { useVuelidate } from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
-<<<<<<< HEAD
-import { requiredMsg, duplicateMsg, duplicated } from '@/plugin/validatorMessage';
-=======
 import { requiredMsg, duplicateMsg } from '@/plugin/validatorMessage';
->>>>>>> origin/main
 
 export default defineComponent({
   name: 'LibraryRegistrationForm',
