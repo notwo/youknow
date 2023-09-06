@@ -30,12 +30,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted, inject, HTMLAttributes } from 'vue';
+import { defineComponent, reactive, onMounted, inject } from 'vue';
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { useVuelidate } from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
-import { requiredMsg, duplicateMsg, duplicated } from '@/plugin/validatorMessage';
-import func from '../../vue-temp/vue-editor-bridge';
+import { requiredMsg, duplicateMsg } from '@/plugin/validatorMessage';
 
 export default defineComponent({
   name: 'LibraryRegistrationForm',
