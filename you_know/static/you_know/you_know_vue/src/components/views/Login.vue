@@ -1,7 +1,9 @@
 <template>
+  <!--
   <h2>login</h2>
   <section class="login-form">
     <form action="">
+      <section class="error-message hidden">メールアドレスもしくはパスワードに誤りがあります</section>
       <section class="form-field">
         <input type="email" name="email" id="email" placeholder="メールアドレス"
           v-model="state.email"
@@ -31,20 +33,30 @@
       </section>
     </form>
   </section>
+  -->
+  <section>
+    <button @click="login">Log in</button>
+  </section>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
+import { useAuth0 } from '@auth0/auth0-vue';
+/*
 import { useVuelidate } from "@vuelidate/core";
 import axios, { AxiosResponse, AxiosError } from "axios";
+import Cookies from 'js-cookie';
 import { required, email, helpers } from "@vuelidate/validators";
 import { requiredMsg, emailFormat } from '@/plugin/validatorMessage';
 import router from '@/router/index';
+*/
 
 export default defineComponent({
   name: 'Login',
   components: {},
   setup() {
+    const auth0 = useAuth0();
+    /*
     const state = reactive({
       email: '',
       password: ''
@@ -74,11 +86,14 @@ export default defineComponent({
         password: document.getElementById('password').value
       };
       axios.post('http://127.0.0.1:8000/api/token/', requestParam).then(res => {
-        this.$session.start();
-        this.$session.set('token', res.data.token);
-        console.log(this.$session)
+        console.log(res.headers['x-auth-token']);
+        console.log(res.request);
+        const jsonData = JSON.stringify(res.data.access);
+        Cookies.set('token', jsonData, { expires: 30 });
         router.push('/');
-      })
+      }).catch((e: AxiosError<ErrorResponse>) => {
+        console.log(`${e.message} ( ${e.name} ) code: ${e.code}`);
+      });
     };
 
     return {
@@ -86,11 +101,18 @@ export default defineComponent({
       state,
       login,
     };
+    */
+    return {
+      login: () => {
+        auth0.loginWithRedirect();
+      }
+    };
   },
 })
 </script>
 
 <style scoped>
+/*
 .form-field {
   padding: 1.2em 0;
 }
@@ -113,5 +135,5 @@ export default defineComponent({
 .error-message {
   color: rgba(200, 0, 0, 0.95);
 }
-
+*/
 </style>

@@ -27,6 +27,7 @@ export default defineComponent({
   setup() {
     const libraryList = ref([]);
     const store = inject('library');
+    const auth0 = store.getUser();
 
     onMounted(() => {
       interface LibraryResponse {

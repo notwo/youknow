@@ -1,6 +1,6 @@
 # !!!2023年内リリース予定!!!
 
-よく使うコマンドを先に書いておく
+## よく使うコマンド
 
 ### Django
 #### マイグレーション
@@ -42,12 +42,14 @@ source env1/Scripts/activate
 python manage.py runserver --traceback
 ```
 
-### VSCode (VueJS)
-```Bash
-npm run dev
-```
 
 ### sqlite3
 ```Bash
 .open ../../youknow/db.sqlite3
+
+.mode column
+.header on
 ```
+
+## 仕様書
+https://docs.google.com/spreadsheets/d/11oPfNFuKaNFGIa5YpgvTpUMOblTlPhV3Mf1nK2M_DFg/edit?usp=sharing

@@ -5,8 +5,10 @@
         <section class="service-icon">サービスアイコン</section>
         <section class="menu">
           <ul class="menu-item">
-            <li><a class="sp-char-mini" href="/you_know/">Profile</a></li>
-            <li><a class="sp-char-mini" href="/you_know/library/">登録済み<br>ライブラリ</a></li>
+            <li v-if="!auth0.isAuthenticated.value"><button @click="login">ログイン</button></li>
+            <li v-if="auth0.isAuthenticated.value"><a class="sp-char-mini" href="/">Profile</a></li>
+            <li v-if="auth0.isAuthenticated.value"><a class="sp-char-mini" :href="'/' + auth0.user.value?.nickname + '/library/'">登録済み<br>ライブラリ</a></li>
+            <li v-if="auth0.isAuthenticated.value"><button @click="logout">ログアウト</button></li>
           </ul>
         </section>
       </section>
@@ -14,7 +16,34 @@
   </header>
 </template>
 
-<script setup></script>
+<script lang="ts">
+import { defineComponent, inject } from 'vue'
+import { useAuth0 } from '@auth0/auth0-vue';
+
+export default defineComponent({
+  name: 'Login',
+  components: {},
+  setup() {
+    const store = inject('library');
+    if (store.getUser()) { console.log('aho') }
+
+    const auth0 = useAuth0();
+    const { logout } = useAuth0();
+
+    store.setUser(auth0);
+
+    return {
+      auth0,
+      login: () => {
+        auth0.loginWithRedirect();
+      },
+      logout: () => {
+        logout({ logoutParams: { returnTo: window.location.origin } });
+      }
+    };
+  }
+});
+</script>
 
 <style scoped>
 header.fixed {

@@ -123,10 +123,6 @@ LOGIN_REDIRECT_URL = "you_know:index"
 LOGOUT_REDIRECT_URL = "you_know:login"
 
 REST_FRAMEWORK = {
-    # 以下をコメントアウトしたら未ログインユーザはapiアクセスできなくなる
-    #'DEFAULT_PERMISSION_CLASSES': [
-    #    'rest_framework.permissions.IsAuthenticated'
-    #],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     ],
