@@ -28,7 +28,10 @@ class CategoryFilter(filters.FilterSet):
 
 class CategoryAjaxViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
-    queryset = Category.objects.all().order_by('-created_at')
+    queryset = Category.objects.all()
     filter_fields = ('title', 'content', 'custom_user_id', 'library_id')
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class = CategoryFilter
+
+    def get_queryset(self):
+        return Category.objects.filter(library=self.kwargs['library_pk']).order_by('-created_at')
