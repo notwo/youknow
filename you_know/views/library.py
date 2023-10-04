@@ -1,6 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from django_filters import rest_framework as filters
 from django.views.generic import TemplateView
 from django.views.generic.edit import ModelFormMixin
 from ..forms import LibraryUpdateForm
@@ -19,16 +18,17 @@ class LibraryViews(TemplateView, ModelFormMixin):
         self.object = None
 
 
+class LibraryFilter(filters.FilterSet):
+    title = filters.CharFilter(lookup_expr='icontains')
+
+    class Meta:
+        model = Library
+        fields = ['title']
+
+
 class LibraryAjaxViewSet(viewsets.ModelViewSet):
     serializer_class = LibrarySerializer
     queryset = Library.objects.all().order_by('-created_at')
     filter_fields = ('title', 'content', 'custom_user_id')
-
-
-class SearchView(APIView):
-    def get(self, request):
-        word = request.GET.get('word')
-        if word == '':
-            return Response(None, status=200)
-        result = Library.objects.filter(title__contains=word)
-        return Response(serializers.serialize("json", result), status=200)
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class = LibraryFilter

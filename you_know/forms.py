@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django import forms
-from .models import CustomUser, DeleteAccountReason, Library
+from .models import CustomUser, DeleteAccountReason, Library, Category
 
 
 class YouKnowUserChangeForm(UserChangeForm):
@@ -46,5 +46,19 @@ class LibraryUpdateForm(forms.ModelForm):
         fields = ('title', 'content')
         labels = {
             'title': 'ライブラリ名',
-            'content': '説明'
+            'content': '内容'
+        }
+
+
+class CategoryUpdateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = " "
+
+    class Meta:
+        model = Category
+        fields = ('title', 'content')
+        labels = {
+            'title': 'カテゴリ名',
+            'content': '内容'
         }
