@@ -41,6 +41,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         editable=False
     )
 
+    sub = models.CharField(
+        max_length=150,
+        unique=False,
+        db_index=True,
+        blank=False,
+        default='.'
+    )
+
     username_validator = UnicodeUsernameValidator()
     username = models.CharField(
         verbose_name=_("username"),
