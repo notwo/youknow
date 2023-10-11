@@ -4,7 +4,6 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import ModelFormMixin
 from ..forms import CategoryUpdateForm
 from ..models import Category
-from django.core import serializers
 from ..serializers import CategorySerializer
 
 

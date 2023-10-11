@@ -35,6 +35,11 @@ python manage.py makemigrations
 python manage.py migrate you_know
 ```
 
+#### ルーティング確認
+```Bash
+python manage.py show_urls
+```
+
 ### Git Bash (Python)
 ```Bash
 cd ~/Desktop/work/youknow
@@ -49,6 +54,8 @@ python manage.py runserver --traceback
 
 .mode column
 .header on
+
+.tables
 ```
 
 ## 仕様書
