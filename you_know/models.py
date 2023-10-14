@@ -43,7 +43,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     sub = models.CharField(
         max_length=150,
-        unique=False,
+        unique=True,
         db_index=True,
         blank=False,
         default='.'
@@ -135,7 +135,7 @@ class DeleteAccountReason(models.Model):
 class Library(models.Model):
     title = models.CharField(verbose_name=_('title'), max_length=50, blank=False)
     content = models.TextField(verbose_name=_('content'), blank=True, null=True,)
-    custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    custom_user = models.ForeignKey(CustomUser, db_column='custom_user_id', to_field='sub', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
