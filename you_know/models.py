@@ -152,7 +152,7 @@ class Library(models.Model):
 class Category(models.Model):
     title = models.CharField(verbose_name=_('title'), max_length=50, blank=False)
     content = models.TextField(verbose_name=_('content'), blank=True, null=True,)
-    custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    custom_user = models.ForeignKey(CustomUser, db_column='custom_user_id', to_field='sub', on_delete=models.CASCADE)
     library = models.ForeignKey(Library, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
