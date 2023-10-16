@@ -32,5 +32,4 @@ class CustomUserAjaxViewSet2(viewsets.ModelViewSet):
     filterset_class = CustomUserFilter
 
     def get_queryset(self):
-        print(self.request.query_params)
         return CustomUser.objects.filter(sub=self.request.query_params.get('sub'))
