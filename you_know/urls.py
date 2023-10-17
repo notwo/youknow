@@ -8,12 +8,10 @@ app_name = 'you_know'
 # api routes
 router = routers.SimpleRouter()
 router.register(r'users', custom_user.CustomUserAjaxViewSet)
-router.register(r'users2', custom_user.CustomUserAjaxViewSet2) #後で名前変更
 users_router = (routers.NestedSimpleRouter(router, 'users', lookup='you_know_customuser'))
 users_router.register('libraries', library.LibraryAjaxViewSet)
-# カテゴリの方は別途migrate完了後に修正する
-#libraries_router = routers.NestedSimpleRouter(router, 'libraries', lookup='library')
-#libraries_router.register('categories', category.CategoryAjaxViewSet)
+libraries_router = routers.NestedSimpleRouter(users_router, 'libraries', lookup='library')
+libraries_router.register('categories', category.CategoryAjaxViewSet)
 
 # other routes
 urlpatterns = [
