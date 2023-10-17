@@ -33,4 +33,7 @@ class CategoryAjaxViewSet(viewsets.ModelViewSet):
     filterset_class = CategoryFilter
 
     def get_queryset(self):
-        return Category.objects.filter(library=self.kwargs['library_pk']).order_by('-created_at')
+        return Category.objects.filter(
+                    custom_user=self.kwargs['you_know_customuser_pk'],
+                    library=self.kwargs['library_pk']
+                ).order_by('-created_at')

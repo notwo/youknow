@@ -4,18 +4,6 @@ from ..models import CustomUser
 from ..serializers import CustomUserSerializer
 
 
-# この部分は仮置きのため後で削除予定
-class CustomUserAjaxViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = CustomUserSerializer
-    filter_fields = 'id'
-    queryset = CustomUser.objects.all()
-
-    def get_queryset(self, *args, **kwargs):
-        username = self.request.query_params.get('username')
-        queryset = CustomUser.objects.filter(username=username)
-        return queryset
-
-
 class CustomUserFilter(filters.FilterSet):
     sub = filters.CharFilter(lookup_expr='exact')
 
@@ -24,7 +12,7 @@ class CustomUserFilter(filters.FilterSet):
         fields = ['sub']
 
 
-class CustomUserAjaxViewSet2(viewsets.ModelViewSet):
+class CustomUserAjaxViewSet(viewsets.ModelViewSet):
     serializer_class = CustomUserSerializer
     queryset = CustomUser.objects.all()
     filter_fields = ('username', 'email', 'sub')
