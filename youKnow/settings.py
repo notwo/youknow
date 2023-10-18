@@ -121,21 +121,25 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = "you_know:index"
-LOGOUT_REDIRECT_URL = "you_know:login"
+#LOGIN_REDIRECT_URL = "you_know:index"
+#LOGOUT_REDIRECT_URL = "you_know:login"
 
+DATA_COLUMN = 3
+DATA_ROW = 5
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication'
-    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': DATA_COLUMN * DATA_ROW
+    #   'DEFAULT_AUTHENTICATION_CLASSES': [
+ #       'rest_framework_simplejwt.authentication.JWTAuthentication'
+ #   ],
 }
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
-    "UPDATE_LAST_LOGIN": True,
-    "ALGORITHM": "HS256",
-    "SIGNING_KEY": env("SECRET_KEY"),
-}
+#SIMPLE_JWT = {
+#    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+#    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+#    "UPDATE_LAST_LOGIN": True,
+#    "ALGORITHM": "HS256",
+#    "SIGNING_KEY": env("SECRET_KEY"),
+#}
 
 #LOGGING = {
 #    'version': 1,
