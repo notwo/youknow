@@ -1,20 +1,8 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, pagination
 from django_filters import rest_framework as filters
-from django.views.generic import TemplateView
-from django.views.generic.edit import ModelFormMixin
-from ..forms import CategoryUpdateForm
+from rest_framework.filters import OrderingFilter
 from ..models import Category
 from ..serializers import CategorySerializer
-
-
-# これは最終的に消す
-class CategoryViews(TemplateView, ModelFormMixin):
-    form_class = CategoryUpdateForm
-    model = Category
-    template_name = "you_know/category/index.html"
-
-    def __init__(self):
-        self.object = None
 
 
 class CategoryFilter(filters.FilterSet):
@@ -25,12 +13,19 @@ class CategoryFilter(filters.FilterSet):
         fields = ['title']
 
 
+class CategoryPagination(pagination.LimitOffsetPagination):
+    ordering = ('-created_at',)
+    page_size = 15
+
+
 class CategoryAjaxViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
     filter_fields = ('title', 'content', 'custom_user_id', 'library_id')
-    filter_backends = [filters.DjangoFilterBackend]
+    filter_backends = [filters.DjangoFilterBackend, OrderingFilter]
     filterset_class = CategoryFilter
+    ordering_fields = ['-created_at']
+    pagination_class = CategoryPagination
 
     def get_queryset(self):
         return Category.objects.filter(
