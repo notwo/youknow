@@ -20,7 +20,7 @@ class LibraryPagination(pagination.LimitOffsetPagination):
 
 class LibraryAjaxViewSet(viewsets.ModelViewSet):
     serializer_class = LibrarySerializer
-    queryset = Library.objects.all()#.order_by('-created_at')
+    queryset = Library.objects.all()
     filter_fields = ('title', 'content', 'custom_user_id')
     filter_backends = [filters.DjangoFilterBackend, OrderingFilter]
     filterset_class = LibraryFilter

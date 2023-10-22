@@ -1,5 +1,6 @@
 from rest_framework import viewsets, pagination
 from django_filters import rest_framework as filters
+from rest_framework.filters import OrderingFilter
 from ..models import Category
 from ..serializers import CategorySerializer
 
@@ -21,7 +22,7 @@ class CategoryAjaxViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
     filter_fields = ('title', 'content', 'custom_user_id', 'library_id')
-    filter_backends = [filters.DjangoFilterBackend]
+    filter_backends = [filters.DjangoFilterBackend, OrderingFilter]
     filterset_class = CategoryFilter
     ordering_fields = ['-created_at']
     pagination_class = CategoryPagination

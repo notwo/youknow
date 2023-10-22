@@ -128,7 +128,7 @@ DATA_COLUMN = 3
 DATA_ROW = 5
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': DATA_COLUMN * DATA_ROW
+    #'PAGE_SIZE': DATA_COLUMN * DATA_ROW
     #   'DEFAULT_AUTHENTICATION_CLASSES': [
  #       'rest_framework_simplejwt.authentication.JWTAuthentication'
  #   ],
