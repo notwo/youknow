@@ -170,7 +170,7 @@ class Category(models.Model):
 class Keyword(models.Model):
     title = models.CharField(verbose_name=_('title'), max_length=50, blank=False)
     content = models.TextField(verbose_name=_('content'), blank=True, null=True,)
-    custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    custom_user = models.ForeignKey(CustomUser, db_column='custom_user_id', to_field='sub', on_delete=models.CASCADE)
     library = models.ForeignKey(Library, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True,)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -189,7 +189,7 @@ class Keyword(models.Model):
 class Tag(models.Model):
     title = models.CharField(verbose_name=_('title'), max_length=50, blank=False)
     content = models.TextField(verbose_name=_('content'), blank=True, null=True, )
-    custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    custom_user = models.ForeignKey(CustomUser, db_column='custom_user_id', to_field='sub', on_delete=models.CASCADE)
     keyword = models.ForeignKey(Keyword, on_delete=models.CASCADE, blank=True, null=True,)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
