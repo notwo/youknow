@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Library, Category, CustomUser
+from .models import CustomUser, Library, Category, Keyword
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -25,4 +25,15 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ["id", "title", "content", "custom_user", "custom_user_id", "library", "library_id", "created_at", "updated_at"]
+        read_only_fields = ('id', 'created_at')
+
+
+class KeywordSerializer(serializers.ModelSerializer):
+    custom_user = CustomUserSerializer
+    library = Library
+    category = Category
+
+    class Meta:
+        model = Keyword
+        fields = ["id", "title", "content", "custom_user", "custom_user_id", "library", "library_id", "category", "category_id", "created_at", "updated_at"]
         read_only_fields = ('id', 'created_at')
