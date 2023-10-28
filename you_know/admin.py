@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 from .models import CustomUser
-from .forms import YouKnowUserChangeForm, YouKnowUserCreationForm
+
 
 class YouKnowUserAdmin(UserAdmin):
     fieldsets = (
@@ -27,11 +27,12 @@ class YouKnowUserAdmin(UserAdmin):
         }),
     )
 
-    form = YouKnowUserChangeForm
-    add_form = YouKnowUserCreationForm
+    # form = YouKnowUserChangeForm
+    # add_form = YouKnowUserCreationForm
     list_display = ("username", "email", "is_staff")
     list_filter = ("is_staff", "is_superuser", "is_active", "groups")
     search_fields = ("email", "username")
     ordering = ("email",)
+
 
 admin.site.register(CustomUser, YouKnowUserAdmin)
