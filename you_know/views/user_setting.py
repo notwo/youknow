@@ -1,47 +1,9 @@
-from django.views.generic import UpdateView, DeleteView, TemplateView
+from django.views.generic import TemplateView
 from django.views.generic.edit import ModelFormMixin
-from django.urls import reverse, reverse_lazy
-from ..forms import UserUpdateForm, UserDeleteAccountReasonForm
-from ..models import CustomUser, DeleteAccountReason, DeleteMailToken
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
+from django.urls import reverse_lazy
+from ..forms import UserDeleteAccountReasonForm
+from ..models import DeleteAccountReason, DeleteMailToken
 from django.http import Http404
-
-
-class UserUpdateView(LoginRequiredMixin, UpdateView):
-    template_name = "you_know/user_setting/profile.html"
-    form_class = UserUpdateForm
-    model = CustomUser
-    slug_field = "username"
-    slug_url_kwarg = "username"
-    login_url = '/login/'
-
-    def get_success_url(self, **kwargs):
-        return reverse_lazy("you_know:profile", kwargs={'username': self.object})
-
-
-class UserDeleteView(LoginRequiredMixin, DeleteView):
-    template_name = "you_know/user_setting/delete_account.html"
-    model = CustomUser
-    slug_field = "username"
-    slug_url_kwarg = "username"
-    login_url = '/login/'
-
-    def get_success_url(self, **kwargs):
-        token = DeleteMailToken.create(None, self.request.user.email)
-        email_template_name = 'you_know/mail_template/user_delete/message.txt'
-        context = {
-            'current_host': self.request._current_scheme_host,
-            'token': token
-        }
-        subject = 'アカウント削除のお知らせ'
-        send_mail(subject, render_to_string(email_template_name, context), 'info@example.com', [self.request.user.email])
-        return reverse('you_know:delete_account_done')
-
-
-class UserDeleteDoneView(TemplateView):
-    template_name = "you_know/user_setting/delete_account_done.html"
 
 
 class UserDeleteAccountReasonView(TemplateView, ModelFormMixin):
