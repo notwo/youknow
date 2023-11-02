@@ -16,14 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from you_know.urls import router as you_know_router, users_router, libraries_router, categories_router
+from you_know.urls import users_router, libraries_router, categories_router, keywords_router, tags_router
 
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('', include('you_know.urls')),
-    path('api/', include(you_know_router.urls)),
     path('api/', include(users_router.urls)),
     path('api/', include(libraries_router.urls)),
     path('api/', include(categories_router.urls)),
+    path('api/', include(keywords_router.urls)),
+    path('api/', include(tags_router.urls)),
 ]
