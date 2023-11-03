@@ -189,7 +189,7 @@ class Keyword(models.Model):
     content = models.TextField(verbose_name=_('content'), blank=True, null=True,)
     custom_user = models.ForeignKey(CustomUser, db_column='custom_user_id', to_field='sub', on_delete=models.CASCADE)
     library = models.ForeignKey(Library, on_delete=models.CASCADE)
-    tags = models.ManyToManyField(Tag, blank=True, null=True,)
+    tags = models.ManyToManyField(Tag, blank=True,)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True,)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
