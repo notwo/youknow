@@ -28,6 +28,7 @@ class TagAjaxViewSet(viewsets.ModelViewSet):
     pagination_class = TagPagination
 
     def get_queryset(self):
+        print(self.kwargs)
         return Tag.objects.filter(
                     custom_user=self.kwargs['you_know_customuser_pk'],
                 ).order_by('-created_at')
