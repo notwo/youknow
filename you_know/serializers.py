@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from drf_writable_nested import WritableNestedModelSerializer
 from .models import CustomUser, Library, Category, Keyword, Tag
 
 
@@ -14,7 +15,11 @@ class LibrarySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Library
-        fields = ["id", "title", "content", "custom_user", "custom_user_id", "created_at", "updated_at"]
+        fields = [
+            "id", "title", "content",
+            "custom_user", "custom_user_id",
+            "created_at", "updated_at",
+        ]
         read_only_fields = ('id', 'created_at')
 
 
@@ -24,7 +29,12 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ["id", "title", "content", "custom_user", "custom_user_id", "library", "library_id", "created_at", "updated_at"]
+        fields = [
+            "id", "title", "content",
+            "custom_user", "custom_user_id",
+            "library", "library_id",
+            "created_at", "updated_at",
+        ]
         read_only_fields = ('id', 'created_at')
 
 
@@ -33,11 +43,15 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = ["id", "title", "content", "custom_user", "custom_user_id", "created_at", "updated_at"]
+        fields = [
+            "id", "title", "content",
+            "custom_user", "custom_user_id",
+            "created_at", "updated_at",
+        ]
         read_only_fields = ('id', 'created_at')
 
 
-class KeywordSerializer(serializers.ModelSerializer):
+class KeywordSerializer(WritableNestedModelSerializer):
     custom_user = CustomUserSerializer
     library = Library
     category = Category
@@ -45,5 +59,12 @@ class KeywordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Keyword
-        fields = ["id", "title", "content", "custom_user", "custom_user_id", "library", "library_id", "category", "category_id", "created_at", "updated_at", "tags"]
+        fields = [
+            "id", "title", "content",
+            "custom_user", "custom_user_id",
+            "library", "library_id",
+            "category", "category_id",
+            "created_at", "updated_at",
+            "tags",
+        ]
         read_only_fields = ('id', 'created_at')
