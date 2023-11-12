@@ -153,7 +153,7 @@ class Category(models.Model):
     title = models.CharField(verbose_name=_('title'), max_length=50, blank=False)
     content = models.TextField(verbose_name=_('content'), blank=True, null=True,)
     custom_user = models.ForeignKey(CustomUser, db_column='custom_user_id', to_field='sub', on_delete=models.CASCADE)
-    library = models.ForeignKey(Library, on_delete=models.CASCADE)
+    library = models.ForeignKey(Library, on_delete=models.CASCADE, related_name='categories')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -169,7 +169,7 @@ class Category(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(verbose_name=_('title'), max_length=50, blank=False)
-    content = models.TextField(verbose_name=_('content'), blank=True, null=True, )
+    content = models.TextField(verbose_name=_('content'), blank=True, null=True,)
     custom_user = models.ForeignKey(CustomUser, db_column='custom_user_id', to_field='sub', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -190,7 +190,7 @@ class Keyword(models.Model):
     custom_user = models.ForeignKey(CustomUser, db_column='custom_user_id', to_field='sub', on_delete=models.CASCADE)
     library = models.ForeignKey(Library, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True,)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True,)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, related_name='keywords')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
