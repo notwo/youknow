@@ -128,10 +128,10 @@ DATA_COLUMN = 3
 DATA_ROW = 5
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    #'PAGE_SIZE': DATA_COLUMN * DATA_ROW
-    #   'DEFAULT_AUTHENTICATION_CLASSES': [
- #       'rest_framework_simplejwt.authentication.JWTAuthentication'
- #   ],
+    # 'PAGE_SIZE': DATA_COLUMN * DATA_ROW,
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication'
+    # ],
 }
 #SIMPLE_JWT = {
 #    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
