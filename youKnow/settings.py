@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django_static_md5url',
     'django_filters',
     'corsheaders',
+    'drf_spectacular',
     'rest_framework',
     'rest_framework_simplejwt',
     'you_know.apps.YouKnowConfig',
@@ -127,12 +128,21 @@ AUTH_PASSWORD_VALIDATORS = [
 DATA_COLUMN = 3
 DATA_ROW = 5
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     # 'PAGE_SIZE': DATA_COLUMN * DATA_ROW,
     # 'DEFAULT_AUTHENTICATION_CLASSES': [
     #     'rest_framework_simplejwt.authentication.JWTAuthentication'
     # ],
 }
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'YouKnow',
+    'DESCRIPTION': 'API仕様書',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,  # api/schemaを表示しない
+}
+
 #SIMPLE_JWT = {
 #    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
 #    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
