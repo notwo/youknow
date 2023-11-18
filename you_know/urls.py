@@ -1,6 +1,6 @@
 from rest_framework_nested import routers
 from django.urls import path
-from .views import user_setting, custom_user, library, category, keyword, tag
+from .views import index, user_setting, custom_user, library, category, keyword, tag
 
 
 app_name = 'you_know'
@@ -19,6 +19,7 @@ tags_router.register('tags', tag.TagAjaxViewSet)
 
 # other routes
 urlpatterns = [
+  path("", index.IndexView.as_view(), name="index"),
   path(
     'user_setting/user/delete_account_reason/<token>',
     user_setting.UserDeleteAccountReasonView.as_view(),
