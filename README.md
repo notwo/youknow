@@ -1,11 +1,15 @@
 # 概要
 知識整理アプリ「youknow」のAPI部分
+
 バージョン1.0.0リリース済み
 
 # API Doc
 - [仕様書ダウンロード](https://you-know-j3fh.onrender.com/api/schema)
 - [仕様書](https://you-know-j3fh.onrender.com/api/docs/)
 - [Redoc](https://you-know-j3fh.onrender.com/api/redoc/)
+
+# 構成
+TBD
 
 # 開発用コマンド
 <details>
@@ -57,6 +61,7 @@ python manage.py migrate you_know
 ```
 
 ## sqlite3
+sqlite-tools-win32-x86-3420000を用いる
 ```Bash
 .open ../../youknow/db.sqlite3
 
@@ -68,6 +73,18 @@ python manage.py migrate you_know
 
 </details>
 
+# 運用
+<details>
+<summary>ここをクリック</summary>
+
+## デプロイ
+[render.com](render.com)へデプロイする(GitHub連携済)
+
+mainブランチにマージされた際に自動でデプロイされる
+
+</details>
+
 # 今後の方針
 残りのissuesに従って、合間合間に実装を進める
+
 単体テストも随時追加予定
