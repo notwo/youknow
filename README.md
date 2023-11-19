@@ -1,9 +1,38 @@
-# !!!2023年内リリース予定!!!
+# 概要
+知識整理アプリ「youknow」のAPI部分
 
-## よく使うコマンド
+バージョン1.0.0リリース済み
 
-### Django
-#### マイグレーション
+# API Doc
+- [仕様書ダウンロード](https://you-know-j3fh.onrender.com/api/schema)
+- [仕様書](https://you-know-j3fh.onrender.com/api/docs/)
+- [Redoc](https://you-know-j3fh.onrender.com/api/redoc/)
+
+# 構成
+PaaSを用いているためインフラの構成は割愛
+
+## DB
+- 開発環境=> SQLite3
+- 本番環境=> PostgreSQL
+
+# 開発用コマンド
+<details>
+<summary>ここをクリック</summary>
+
+## サーバ起動(Windows)
+```Bash
+cd ~/Desktop/work/youknow
+source env1/Scripts/activate
+python manage.py runserver --traceback
+```
+
+## Django
+### ルーティング確認
+```Bash
+python manage.py show_urls
+```
+
+### マイグレーション
 ```Bash
 # マイグレーション確認
 python manage.py showmigrations
@@ -15,7 +44,7 @@ python manage.py makemigrations
 python manage.py migrate you_know
 ```
 
-#### マイグレーションやり直し手順
+### マイグレーションやり直し手順
 ```Bash
 .open ../../youknow/db.sqlite3
 drop table <テーブル名>;
@@ -35,20 +64,8 @@ python manage.py makemigrations
 python manage.py migrate you_know
 ```
 
-#### ルーティング確認
-```Bash
-python manage.py show_urls
-```
-
-### Git Bash (Python)
-```Bash
-cd ~/Desktop/work/youknow
-source env1/Scripts/activate
-python manage.py runserver --traceback
-```
-
-
-### sqlite3
+## sqlite3
+sqlite-tools-win32-x86-3420000を用いる
 ```Bash
 .open ../../youknow/db.sqlite3
 
@@ -58,5 +75,20 @@ python manage.py runserver --traceback
 .tables
 ```
 
-## 仕様書
-https://docs.google.com/spreadsheets/d/11oPfNFuKaNFGIa5YpgvTpUMOblTlPhV3Mf1nK2M_DFg/edit?usp=sharing
+</details>
+
+# 運用
+<details>
+<summary>ここをクリック</summary>
+
+## デプロイ
+[render.com](render.com)へデプロイする(GitHub連携済)
+
+mainブランチにマージされた際に自動でデプロイされる
+
+</details>
+
+# 今後の方針
+残りのissuesに従って、合間合間に実装を進める
+
+単体テストも随時追加予定
