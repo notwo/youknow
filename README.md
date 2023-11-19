@@ -9,7 +9,11 @@
 - [Redoc](https://you-know-j3fh.onrender.com/api/redoc/)
 
 # 構成
-TBD
+PaaSを用いているためインフラの構成は割愛
+
+## DB
+- 開発環境=> SQLite3
+- 本番環境=> PostgreSQL
 
 # 開発用コマンド
 <details>
