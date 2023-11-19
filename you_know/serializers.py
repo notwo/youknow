@@ -73,7 +73,7 @@ class CategorySerializer(serializers.ModelSerializer):
                 'next': False,
                 'data': []
             }
-        paginator = Paginator(keywords, 9)
+        paginator = Paginator(keywords, 50)
         page = paginator.page(1)
         serializer = KeywordSerializer(page, many=True)
         result = {
@@ -112,7 +112,7 @@ class LibrarySerializer(serializers.ModelSerializer):
                 'next': False,
                 'data': []
             }
-        paginator = Paginator(categories, 9)
+        paginator = Paginator(categories, 30)
         page = paginator.page(1)
         serializer = CategorySerializer(page, many=True)
         result = {
