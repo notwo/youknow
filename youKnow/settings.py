@@ -67,7 +67,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = (os.environ.get("ALLOWED_ORIGINS").split(" "))
+CORS_ALLOWED_ORIGINS = (env("ALLOWED_ORIGINS").split(" "))
 
 ROOT_URLCONF = 'youKnow.urls'
 
