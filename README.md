@@ -22,6 +22,18 @@ PaaSを用いているためインフラの構成は割愛
 ## サーバ起動(Windows)
 ```Bash
 cd ~/Desktop/work/youknow
+```
+
+git clone直後のみ以下を実行する
+```Bash
+virtualenv env1
+source env1/Scripts/activate
+pip install -r requirements.txt
+python manage.py runserver --traceback
+```
+
+以下は起動のたびに実行する
+```Bash
 source env1/Scripts/activate
 python manage.py runserver --traceback
 ```
@@ -73,6 +85,16 @@ sqlite-tools-win32-x86-3420000を用いる
 .header on
 
 .tables
+```
+
+## 開発環境DBへのユーザ登録
+1. 開発環境の画面(http://localhost:5173)からAuth0へユーザ登録までする
+1. Auth0画面の左ペインUser Management→Usersから、さっき追加したユーザをクリック
+1. Raw JSONタブを開く
+1. email, nickname, user_idをメモしておく
+1. メモしたそれぞれに読み替えて以下コマンドを実行
+```Bash
+curl -X POST -H "Content-Type: application/json" -d '{"username" : "<username>", "email" : "<email>", "sub" : "<sub>" }' http://127.0.0.1:8000/api/users/
 ```
 
 </details>
