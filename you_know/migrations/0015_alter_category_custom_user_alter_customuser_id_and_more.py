@@ -13,16 +13,16 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='customuser',
-            name='sub',
-            field=models.CharField(db_index=True, editable=False, max_length=150, primary_key=True, serialize=False),
-        ),
         #migrations.AlterField(
         #    model_name='customuser',
-        #    name='id',
-        #    field=models.UUIDField(db_index=True, default=uuid.uuid4, editable=False, unique=True),
+        #    name='sub',
+        #    field=models.CharField(db_index=True, editable=False, max_length=150, primary_key=True, serialize=False),
         #),
+        migrations.AlterField(
+            model_name='customuser',
+            name='id',
+            field=models.UUIDField(db_index=True, default=uuid.uuid4, editable=False, unique=True),
+        ),
         #migrations.AlterField(
         #    model_name='category',
         #    name='custom_user',
