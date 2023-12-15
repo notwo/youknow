@@ -36,16 +36,17 @@ class UserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(
         default=uuid.uuid4,
+        primary_key=True,
         db_index=True,
-        unique=True,
         editable=False
     )
 
     sub = models.CharField(
         max_length=150,
-        primary_key=True,
+        unique=True,
         db_index=True,
-        editable=False
+        blank=False,
+        default='.'
     )
 
     username_validator = UnicodeUsernameValidator()
