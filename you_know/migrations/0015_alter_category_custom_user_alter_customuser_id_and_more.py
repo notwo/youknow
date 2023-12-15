@@ -23,24 +23,24 @@ class Migration(migrations.Migration):
             name='id',
             field=models.UUIDField(db_index=True, default=uuid.uuid4, editable=False, unique=True),
         ),
-        migrations.AlterField(
-            model_name='category',
-            name='custom_user',
-            field=models.ForeignKey(db_column='custom_user_id', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, to_field='sub'),
-        ),
-        migrations.AlterField(
-            model_name='keyword',
-            name='custom_user',
-            field=models.ForeignKey(db_column='custom_user_id', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, to_field='sub'),
-        ),
-        migrations.AlterField(
-            model_name='library',
-            name='custom_user',
-            field=models.ForeignKey(db_column='custom_user_id', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, to_field='sub'),
-        ),
-        migrations.AlterField(
-            model_name='tag',
-            name='custom_user',
-            field=models.ForeignKey(db_column='custom_user_id', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, to_field='sub'),
-        ),
+        #migrations.AlterField(
+        #    model_name='category',
+        #    name='custom_user',
+        #    field=models.ForeignKey(db_column='custom_user_id', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, to_field='sub'),
+        #),
+        #migrations.AlterField(
+        #    model_name='keyword',
+        #    name='custom_user',
+        #    field=models.ForeignKey(db_column='custom_user_id', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, to_field='sub'),
+        #),
+        #migrations.AlterField(
+        #    model_name='library',
+        #    name='custom_user',
+        #    field=models.ForeignKey(db_column='custom_user_id', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, to_field='sub'),
+        #),
+        #migrations.AlterField(
+        #    model_name='tag',
+        #    name='custom_user',
+        #    field=models.ForeignKey(db_column='custom_user_id', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, to_field='sub'),
+        #),
     ]
