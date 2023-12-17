@@ -18,6 +18,3 @@ class CustomUserAjaxViewSet(viewsets.ModelViewSet):
     filter_fields = ('username', 'email', 'sub')
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class = CustomUserFilter
-
-    def get_queryset(self):
-        return CustomUser.objects.filter(sub=self.request.query_params.get('sub'))
