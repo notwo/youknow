@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from you_know.urls import users_router, libraries_router, categories_router, keywords_router, tags_router
+from you_know.urls import users_origin_router, users_router, libraries_router, categories_router, keywords_router, tags_router
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
@@ -33,6 +33,7 @@ urlpatterns = [
 
     # endpoints
     path('', include('you_know.urls')),
+    path('api/', include(users_origin_router.urls)),
     path('api/', include(users_router.urls)),
     path('api/', include(libraries_router.urls)),
     path('api/', include(categories_router.urls)),

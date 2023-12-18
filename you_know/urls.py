@@ -6,6 +6,8 @@ from .views import index, user_setting, custom_user, library, category, keyword,
 app_name = 'you_know'
 
 # api routes
+users_origin_router = routers.DefaultRouter()
+users_origin_router.register(r'users', custom_user.CustomUserAjaxViewSet)
 users_router = routers.SimpleRouter()
 users_router.register(r'users', custom_user.CustomUserAjaxViewSet)
 libraries_router = (routers.NestedSimpleRouter(users_router, 'users', lookup='you_know_customuser'))
