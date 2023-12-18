@@ -31,3 +31,14 @@ class CustomUserAjaxViewSet(viewsets.ModelViewSet):
             return Response({"duplicated": False})
         else:
             return Response({"duplicated": True})
+
+    @action(methods=['get'], detail=False)
+    def email_duplicated(self, request):
+        email = request.GET.get('email')
+        if email is None:
+            return Response({"duplicated": True})
+        users = CustomUser.objects.filter(email=email)
+        if len(users) == 0:
+            return Response({"duplicated": False})
+        else:
+            return Response({"duplicated": True})
