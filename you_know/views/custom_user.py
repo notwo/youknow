@@ -22,7 +22,7 @@ class CustomUserAjaxViewSet(viewsets.ModelViewSet):
     filterset_class = CustomUserFilter
 
     @action(methods=['get'], detail=False)
-    def nickname_duplicated(self, request):
+    def username_duplicated(self, request):
         username = request.GET.get('username')
         if username is None:
             return Response({"duplicated": True})
