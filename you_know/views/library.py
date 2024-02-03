@@ -38,12 +38,12 @@ class LibraryAjaxViewSet(viewsets.ModelViewSet):
     def search_by_tag(self, request, **kwargs):
         sub = kwargs['you_know_customuser_pk']
         title = request.GET.get('title')
-        tag_ids = Tag.objects.filter(custom_user=sub, title__contains=title).values('id')
-        if len(tag_ids) == 0:
+        tags = Tag.objects.filter(custom_user=sub, title__contains=title)
+        if len(tags) == 0:
             return Response([])
         else:
-            keyword_ids = Keyword.objects.filter(tags__in=tag_ids)
-            category_ids = Category.objects.filter(keywords__in=keyword_ids)
-            libraries = Library.objects.filter(categories__in=category_ids)
+            keywords = Keyword.objects.filter(tags__in=tags)
+            categories = Category.objects.filter(keywords__in=keywords)
+            libraries = Library.objects.filter(categories__in=categories).distinct()
             serializer = self.get_serializer(instance=libraries, many=True)
             return Response(serializer.data)
