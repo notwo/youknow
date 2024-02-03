@@ -3,8 +3,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters import rest_framework as filters
 from rest_framework.filters import OrderingFilter
-from ..models import Library, Tag
-from ..serializers import LibrarySerializer, TagSerializer
+from ..models import Library, Category, Keyword, Tag
+from ..serializers import LibrarySerializer
 
 
 class LibraryFilter(filters.FilterSet):
@@ -38,11 +38,12 @@ class LibraryAjaxViewSet(viewsets.ModelViewSet):
     def search_by_tag(self, request, **kwargs):
         sub = kwargs['you_know_customuser_pk']
         title = request.GET.get('title')
-        tags = Tag.objects.filter(custom_user=sub, title__contains=title)
-        #serializer = TagSerializer(instance=self.get_object())
-        if len(tags) == 0:
+        tag_ids = Tag.objects.filter(custom_user=sub, title__contains=title).values('id')
+        if len(tag_ids) == 0:
             return Response([])
         else:
-            #keyword_ids = [tag.keywords.all() for tag in tags]
-            #return Response(serializer.data)
-            return Response([])
+            keyword_ids = Keyword.objects.filter(tags__in=tag_ids)
+            category_ids = Category.objects.filter(keywords__in=keyword_ids)
+            libraries = Library.objects.filter(categories__in=category_ids)
+            serializer = self.get_serializer(instance=libraries, many=True)
+            return Response(serializer.data)
