@@ -29,7 +29,7 @@ class KeywordAjaxViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Keyword.objects.filter(
-                    custom_user=self.kwargs['you_know_customuser_pk'],
-                    category=self.kwargs['category_pk'],
-                    library=self.kwargs['library_pk']
-                ).order_by('-created_at')
+            custom_user=self.kwargs['you_know_customuser_pk'],
+            category=self.kwargs['category_pk'],
+            library=self.kwargs['library_pk']
+        ).order_by('-created_at')
