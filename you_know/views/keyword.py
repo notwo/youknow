@@ -47,3 +47,13 @@ class KeywordAjaxViewSet(viewsets.ModelViewSet):
             keywords = Keyword.objects.filter(tags__in=tags).distinct()
             serializer = self.get_serializer(instance=keywords, many=True)
             return Response(serializer.data)
+
+    @action(methods=['get'], detail=False)
+    def search_by_content(self, request, **kwargs):
+        sub = kwargs['you_know_customuser_pk']
+        library_id = kwargs['library_pk']
+        category_id = kwargs['category_pk']
+        content = request.GET.get('content')
+        keywords = Keyword.objects.filter(custom_user=sub, library_id=library_id, category_id=category_id, content__contains=content)
+        serializer = self.get_serializer(instance=keywords, many=True)
+        return Response(serializer.data)

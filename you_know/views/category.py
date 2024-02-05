@@ -47,3 +47,12 @@ class CategoryAjaxViewSet(viewsets.ModelViewSet):
             categories = Category.objects.filter(keywords__in=keywords).distinct()
             serializer = self.get_serializer(instance=categories, many=True)
             return Response(serializer.data)
+
+    @action(methods=['get'], detail=False)
+    def search_by_content(self, request, **kwargs):
+        sub = kwargs['you_know_customuser_pk']
+        library_id = kwargs['library_pk']
+        content = request.GET.get('content')
+        categories = Category.objects.filter(custom_user=sub, library_id=library_id, content__contains=content)
+        serializer = self.get_serializer(instance=categories, many=True)
+        return Response(serializer.data)
