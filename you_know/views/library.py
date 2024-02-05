@@ -47,3 +47,11 @@ class LibraryAjaxViewSet(viewsets.ModelViewSet):
             libraries = Library.objects.filter(categories__in=categories).distinct()
             serializer = self.get_serializer(instance=libraries, many=True)
             return Response(serializer.data)
+
+    @action(methods=['get'], detail=False)
+    def search_by_content(self, request, **kwargs):
+        sub = kwargs['you_know_customuser_pk']
+        content = request.GET.get('content')
+        libraries = Library.objects.filter(custom_user=sub, content__contains=content)
+        serializer = self.get_serializer(instance=libraries, many=True)
+        return Response(serializer.data)
