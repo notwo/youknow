@@ -1,4 +1,5 @@
 from rest_framework import viewsets, pagination
+from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters import rest_framework as filters
@@ -54,6 +55,23 @@ class KeywordAjaxViewSet(viewsets.ModelViewSet):
         library_id = kwargs['library_pk']
         category_id = kwargs['category_pk']
         content = request.GET.get('content')
-        keywords = Keyword.objects.filter(custom_user=sub, library_id=library_id, category_id=category_id, content__contains=content)
+        keywords = Keyword.objects.filter(
+            custom_user=sub,
+            library_id=library_id,
+            category_id=category_id,
+            content__contains=content)
         serializer = self.get_serializer(instance=keywords, many=True)
         return Response(serializer.data)
+
+    @action(methods=['patch'], detail=True)
+    def move(self, request, **kwargs):
+        destination_category_id = request.GET.get('move_category_id')
+        data = {
+            'category': destination_category_id
+        }
+        before = Keyword.objects.get(id=kwargs['pk'])
+        serializer = self.serializer_class(instance=before, data=data, partial=True)
+        serializer.is_valid()
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_200_OK)

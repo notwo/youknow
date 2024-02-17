@@ -42,6 +42,9 @@ class KeywordSerializer(WritableNestedModelSerializer):
         ]
         read_only_fields = ('id', 'created_at')
 
+    def update(self, instance, validated_data):
+        return super().update(instance, validated_data)
+
 
 class CategorySerializer(serializers.ModelSerializer):
     custom_user = CustomUserSerializer
