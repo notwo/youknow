@@ -1,4 +1,5 @@
 from rest_framework import viewsets, pagination
+from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters import rest_framework as filters
@@ -46,6 +47,7 @@ class LibraryAjaxViewSet(viewsets.ModelViewSet):
             categories = Category.objects.filter(keywords__in=keywords)
             libraries = Library.objects.filter(categories__in=categories).distinct()
             serializer = self.get_serializer(instance=libraries, many=True)
+
             return Response(serializer.data)
 
     @action(methods=['get'], detail=False)
@@ -54,4 +56,13 @@ class LibraryAjaxViewSet(viewsets.ModelViewSet):
         content = request.GET.get('content')
         libraries = Library.objects.filter(custom_user=sub, content__contains=content)
         serializer = self.get_serializer(instance=libraries, many=True)
+
         return Response(serializer.data)
+
+    @action(methods=['delete'], detail=False)
+    def multi_delete(self, request, **kwargs):
+        ids = request.GET.get('ids')
+        libraries = Library.objects.filter(id__in=ids.split(','))
+        libraries.delete()
+
+        return Response(libraries, status=status.HTTP_200_OK)
