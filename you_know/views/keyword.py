@@ -75,3 +75,11 @@ class KeywordAjaxViewSet(viewsets.ModelViewSet):
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(methods=['delete'], detail=False)
+    def multi_delete(self, request, **kwargs):
+        ids = request.GET.get('ids')
+        keywords = Keyword.objects.filter(id__in=ids.split(','))
+        keywords.delete()
+
+        return Response(keywords, status=status.HTTP_200_OK)
