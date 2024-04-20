@@ -234,7 +234,7 @@ class TestsUrls(TestCase):
         view = reverse('swagger-ui')
         self.assertEqual(view, '/api/docs/')
 
-    def test_schema_url(self):
+    def test_redoc_url(self):
         view = reverse('redoc')
         self.assertEqual(view, '/api/redoc/')
 
