@@ -2,6 +2,15 @@ from django.test import TestCase
 from you_know.models import CustomUser, Library, Category, Keyword, Tag
 
 
+
+class CustomUserModelTests(TestCase):
+    def test_single_record(self):
+        user = CustomUser(username='username', email='test@example.com', sub='subsubsub')
+        user.save()
+        users = CustomUser.objects.all()
+        self.assertEqual(users.count(), 1)
+
+
 class LibraryModelTests(TestCase):
     def test_single_record(self):
         CustomUser.objects.create(username='username', email='test@example.com', sub='subsubsub')
